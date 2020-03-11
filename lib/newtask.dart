@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'main.dart';
 
+
+
+//Note: Code that does not include the following will not be marked
+// comment header block on each .dart file;
+// Inline comments at the beginning of each method;
+
 class NewTask extends StatefulWidget {
   NewTask();
 
