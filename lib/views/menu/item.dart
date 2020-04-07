@@ -1,22 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'main.dart';
+import 'menu_list.dart';
 
 
-
-//Note: Code that does not include the following will not be marked
-// comment header block on each .dart file;
-// Inline comments at the beginning of each method;
-
-class NewTask extends StatefulWidget {
-  NewTask();
+class Item extends StatefulWidget {
+  Item();
 
   @override
   _NewTaskState createState() => _NewTaskState();
 }
 
-class _NewTaskState extends State<NewTask> {
+class _NewTaskState extends State<Item> {
   String title, subtitle, image;
 
   getTitle(title) {
@@ -41,7 +36,7 @@ class _NewTaskState extends State<NewTask> {
     ds.setData(tasks).whenComplete(() {
       Navigator.push(context,
           MaterialPageRoute(
-              builder: (context) => MyHomePage(),
+              builder: (context) => MenuList(),
               fullscreenDialog: true
           )
       );
@@ -119,9 +114,7 @@ class _NewTaskState extends State<NewTask> {
       ),
     );
   }
-  
-  
-  
+
 
   Widget _myAppBar() {
     return AppBar(
