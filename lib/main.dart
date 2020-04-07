@@ -1,13 +1,20 @@
+
 import 'package:flutter/material.dart';
 import 'views/menu/menu_list.dart';
+import 'views/auth/login.dart';
+import 'views/auth/register.dart';
+import 'views/menu/new_item.dart';
 
 void main() => runApp(MaterialApp(
 
-  initialRoute: '/menu_list',
+  initialRoute: '/login',
 
   routes: {
     '/' : (context) => MyApp(),
-    '/menu_list' : (context) => MyApp()
+    '/menu_list' : (context) => MyApp(),
+    '/login' : (context) => Login(),
+    '/register' : (context) => Register(),
+    '/new_item' : (context) => Item()
   },
 
 ));

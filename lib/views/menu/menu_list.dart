@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'item.dart';
+import '../navbar/bottom_navigation.dart';
+import 'new_item.dart';
 
 class MenuList extends StatefulWidget {
 
@@ -14,6 +15,17 @@ class MenuList extends StatefulWidget {
 }
 
 class _MenuListState extends State<MenuList> {
+
+  void toAddItem(){
+
+    Navigator.push(context,
+        MaterialPageRoute(
+            builder: (context) => Item(),
+            fullscreenDialog: true
+        )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +58,11 @@ class _MenuListState extends State<MenuList> {
         stream: Firestore.instance.collection('post').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            const Text('Loading');
+            return Scaffold(
+              body: Text( "Loading ... "),
+            );
           } else {
+
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
@@ -95,9 +110,19 @@ class _MenuListState extends State<MenuList> {
                     ],
                   );
                 });
+
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          toAddItem();
+        },
+        child: Icon(Icons.add,color: Colors.white),
+        backgroundColor: Colors.blue[600],
+      ),
+
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 
