@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../menu/new_item.dart';
+import '../user/user_profile.dart';
 import '../auth/login.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -31,12 +32,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
               );
              break;
 
-      case 1 : Navigator.push(context,
-                  MaterialPageRoute(
-                      builder: (context) => Item(),
-                      fullscreenDialog: true
-                  )
-              );
+      case 1 :   Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => UserProfile(),
+                        fullscreenDialog: true
+                    )
+                );
               break;
 
       case 2 :  signOutUser();

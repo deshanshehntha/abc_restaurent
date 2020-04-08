@@ -68,7 +68,112 @@ class _MenuListState extends State<MenuList> {
                 itemBuilder: (context, index) {
                   DocumentSnapshot mypost = snapshot.data.documents[index];
                   return Stack(
-                    children: <Widget>[
+                    children: [
+
+                       Card(
+                        child: new Column(
+                          children: <Widget>[
+
+                            Text('${mypost['title']}',
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold
+                                )
+                            ),
+
+                            SizedBox(
+                              height: 5,
+                            ),
+
+                             Image.network('${mypost['image']}'),
+
+                            SizedBox(
+                              height: 8,
+                            ),
+
+                            Text('${mypost['subtitle']}',
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 18.0,
+                                    fontStyle: FontStyle.italic
+                                )
+                            ),
+
+                             Padding(
+                                padding:  EdgeInsets.all(7.0),
+                                child:  Row(
+                                  children: <Widget>[
+
+                                     Padding(
+                                      padding:  EdgeInsets.all(7.0),
+                                      child:FlatButton.icon(
+                                        color: Colors.white,
+                                        icon: Icon(
+                                            Icons.edit
+                                        ), //
+                                        textColor: Colors.blueAccent,// `Icon` to display
+                                        label: Text(
+                                            'Edit'
+                                        ),
+                                        onPressed: () {
+
+                                        },
+                                      ),
+                                    ),
+
+                                    Padding(
+                                      padding:  EdgeInsets.all(7.0),
+                                      child:FlatButton.icon(
+                                        color: Colors.white,
+                                        icon: Icon(
+                                            Icons.delete_forever
+                                        ), //
+                                        textColor: Colors.redAccent,// `Icon` to display
+                                        label: Text(
+                                            'Delete'
+                                        ),
+                                        onPressed: () {
+
+                                        },
+                                      ),
+                                    ),
+
+
+                                  ],
+                                )),
+
+
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  );
+                });
+
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          toAddItem();
+        },
+        child: Icon(Icons.add,color: Colors.white),
+        backgroundColor: Colors.blue[600],
+      ),
+
+      bottomNavigationBar: BottomNavigation(),
+    );
+  }
+
+}
+
+/*
+  children: <Widget>[
                       Container(
                         width: MediaQuery.of(context).size.width,
                         height: 350.0,
@@ -108,22 +213,4 @@ class _MenuListState extends State<MenuList> {
                         ),
                       )
                     ],
-                  );
-                });
-
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          toAddItem();
-        },
-        child: Icon(Icons.add,color: Colors.white),
-        backgroundColor: Colors.blue[600],
-      ),
-
-      bottomNavigationBar: BottomNavigation(),
-    );
-  }
-
-}
+ */
