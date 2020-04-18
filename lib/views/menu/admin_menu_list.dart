@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,12 +18,42 @@ class MenuList extends StatefulWidget {
 class _MenuListState extends State<MenuList> {
 
   void toAddItem(){
-
     Navigator.push(context,
         MaterialPageRoute(
             builder: (context) => Item(),
             fullscreenDialog: true
         )
+    );
+  }
+
+  deleteData(snapshot, index) async {
+    await Firestore.instance.runTransaction((Transaction myTransaction) async {
+      await myTransaction.delete(snapshot.data.documents[index].reference);
+    });
+    _showDialog();
+  }
+
+  // user defined function
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Delete Confirmation"),
+          content: new Text("Item Deleted"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -62,7 +93,6 @@ class _MenuListState extends State<MenuList> {
               body: Text( "Loading ... "),
             );
           } else {
-
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
@@ -70,7 +100,7 @@ class _MenuListState extends State<MenuList> {
                   return Stack(
                     children: [
 
-                       Card(
+                      Card(
                         child: new Column(
                           children: <Widget>[
 
@@ -86,7 +116,7 @@ class _MenuListState extends State<MenuList> {
                               height: 5,
                             ),
 
-                             Image.network('${mypost['image']}'),
+                            Image.network('${mypost['image']}'),
 
                             SizedBox(
                               height: 8,
@@ -100,12 +130,12 @@ class _MenuListState extends State<MenuList> {
                                 )
                             ),
 
-                             Padding(
+                            Padding(
                                 padding:  EdgeInsets.all(7.0),
                                 child:  Row(
                                   children: <Widget>[
 
-                                     Padding(
+                                    Padding(
                                       padding:  EdgeInsets.all(7.0),
                                       child:FlatButton.icon(
                                         color: Colors.white,
@@ -134,7 +164,7 @@ class _MenuListState extends State<MenuList> {
                                             'Delete'
                                         ),
                                         onPressed: () {
-
+                                          deleteData(snapshot, index);
                                         },
                                       ),
                                     ),
@@ -154,7 +184,6 @@ class _MenuListState extends State<MenuList> {
                     ],
                   );
                 });
-
           }
         },
       ),
