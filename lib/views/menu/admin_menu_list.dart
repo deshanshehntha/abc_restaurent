@@ -144,6 +144,27 @@ class _MenuListState extends State<MenuList> {
                                     fontStyle: FontStyle.italic
                                 )
                             ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 40.0),
+                              child: FloatingActionButton.extended(
+                                heroTag: null,
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DescriptionPage(
+                                                  id: title),
+                                          fullscreenDialog: true
+                                      )
+                                  );
+                                },
+                                label: Text('${mypost['price']}'),
+                                icon: Icon(Icons.thumb_up),
+                                backgroundColor: Colors.orange,
+                              ),
+                            ),
+
+
 
                             Padding(
                                 padding:  EdgeInsets.all(7.0),
@@ -210,6 +231,7 @@ class _MenuListState extends State<MenuList> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: null,
         onPressed: (){
           toAddItem();
         },
