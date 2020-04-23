@@ -80,27 +80,34 @@ class _NewTaskState extends State<Item> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: <Widget>[
-          _myAppBar(),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 200,
-            child: ListView(
-              children: <Widget>[
+      resizeToAvoidBottomPadding: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _myAppBar(),
+            Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height - 10,
+              child: ListView(
+                children: <Widget>[
 
-                isImageLoaded ?
-                Container(
-                    child: isImageLoaded ? Image.asset(image) : null
-                )
-                :
-                Container(
+                  isImageLoaded ?
+                  Container(
+                      child: isImageLoaded ? Image.asset(image) : null
+                  )
+                      :
+                  Container(
 
-                ),
+                  ),
 
-                Container(
-                   // padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  Container(
+                    // padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     child: FlatButton.icon(
                       color: Colors.white,
                       icon: Icon(Icons.add_photo_alternate), //`Icon` to display
@@ -111,69 +118,81 @@ class _NewTaskState extends State<Item> {
                         chooseImage();
                       },
                     ),
-                ),
+                  ),
 
-                Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String title) {
-                      getTitle(title);
-                    },
-                    decoration: InputDecoration(labelText: "Title"),
-                  ),
-                ),
-                
-                Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String subtitle) {
-                      getSubtitle(subtitle);
-                    },
-                    decoration: InputDecoration(labelText: "Subtitle"),
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String description) {
-                      getDescription(description);
-                    },
-                    decoration: InputDecoration(labelText: "Description"),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    RaisedButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        Navigator.of(context).pop();
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: TextField(
+                      onChanged: (String title) {
+                        getTitle(title);
                       },
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      decoration: InputDecoration(labelText: "Title"),
                     ),
-                    RaisedButton(
-                      color: Colors.redAccent,
-                      onPressed: () {
-                        createData();
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: TextField(
+                      onChanged: (String subtitle) {
+                        getSubtitle(subtitle);
                       },
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(labelText: "Subtitle"),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: TextField(
+                      onChanged: (String description) {
+                        getDescription(description);
+                      },
+                      decoration: InputDecoration(labelText: "Description"),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      RaisedButton(
+                        color: Colors.blue,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
-                    )
-                  ],
-                )
-
-              ],
+                      RaisedButton(
+                        color: Colors.redAccent,
+                        onPressed: () {
+                          createData();
+                        },
+                        child: const Text(
+                          "Submit",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery
+                        .of(context)
+                        .viewInsets
+                        .bottom,
+                  ),
+                ],
+              ),
             ),
-          ),
 
-        ],
+          ],
+        ),
       ),
+
+
       bottomNavigationBar: BottomNavigation(),
     );
   }
