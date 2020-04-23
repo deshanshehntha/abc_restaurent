@@ -8,6 +8,7 @@ import 'views/menu/customer_menu_list.dart';
 import 'views/menu/new_item.dart';
 import 'views/user/user_profile.dart';
 import 'views/menu/update_menu_item.dart';
+import 'views/menu/description_page.dart';
 
 /// This is  the main class of the appication
 /// This class contains the routers and
@@ -24,8 +25,8 @@ void main() => runApp(MaterialApp(
     '/new_item': (context) => Item(),
     '/user_profile': (context) => UserProfile(),
     '/customer_menus_list': (context) => CustomerMenuList(),
-    '/updateItem': (context) => UpdateItem()
-
+    '/updateItem': (context) => UpdateItem(),
+    '/description_page': (context) => DescriptionPage()
 
   },
 ));

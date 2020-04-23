@@ -1,3 +1,4 @@
+import 'package:awesome_project/views/menu/description_page.dart';
 import 'package:awesome_project/views/menu/update_menu_item.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,8 @@ class _MenuListState extends State<MenuList> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot mypost = snapshot.data.documents[index];
+                  String title = "";
+                  title = mypost['title'];
                   return Stack(
                     children: [
 
@@ -104,12 +107,24 @@ class _MenuListState extends State<MenuList> {
                         child: new Column(
                           children: <Widget>[
 
-                            Text('${mypost['title']}',
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold
-                                )
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            DescriptionPage(
+                                                id: title),
+                                        fullscreenDialog: true
+                                    )
+                                );
+                              },
+                              child: Text('${mypost['title']}',
+                                  style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold
+                                  )
+                              ),
                             ),
 
                             SizedBox(
@@ -151,7 +166,7 @@ class _MenuListState extends State<MenuList> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       UpdateItem(
-                                                          id: '${mypost['title']}'),
+                                                          id: title),
                                                   fullscreenDialog: true
                                               )
                                           );
@@ -250,3 +265,4 @@ class _MenuListState extends State<MenuList> {
                       )
                     ],
  */
+

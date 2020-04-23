@@ -1,3 +1,4 @@
+import 'package:awesome_project/views/menu/admin_menu_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../menu/new_item.dart';
@@ -25,29 +26,29 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
     switch(index){
       case 0 :  Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => Item(),
-                    fullscreenDialog: true
-                )
-              );
-             break;
+          MaterialPageRoute(
+              builder: (context) => MenuList(),
+              fullscreenDialog: true
+          )
+      );
+      break;
 
       case 1 :   Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => UserProfile(),
-                        fullscreenDialog: true
-                    )
-                );
-              break;
+          MaterialPageRoute(
+              builder: (context) => UserProfile(),
+              fullscreenDialog: true
+          )
+      );
+      break;
 
       case 2 :  signOutUser();
-                Navigator.push(context,
-                  MaterialPageRoute(
-                      builder: (context) => Login(),
+      Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => Login(),
 
-                  )
-              );
-              break;
+          )
+      );
+      break;
     }
   }
 
@@ -62,7 +63,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         BottomNavigationBarItem(
           icon: Icon(Icons.restaurant_menu),
           title: Text(
-            "Menu"
+              "Menu"
           ),
 
         ),
