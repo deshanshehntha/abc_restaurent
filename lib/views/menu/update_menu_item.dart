@@ -1,10 +1,10 @@
 import 'dart:io';
+import 'package:awesome_project/views/navbar/bottom_navigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'admin_menu_list.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class UpdateItem extends StatefulWidget {
   final String id;
@@ -16,7 +16,7 @@ class UpdateItem extends StatefulWidget {
 }
 
 class _UpdateTaskState extends State<UpdateItem> {
-  String title, subtitle, image;
+  String title, subtitle, image, description;
   bool isImageLoaded = false;
   File imageFile;
 
@@ -30,6 +30,10 @@ class _UpdateTaskState extends State<UpdateItem> {
 
   getImage(image) {
     this.image = image;
+  }
+
+  getDescription(description) {
+    this.description = description;
   }
 
   Future chooseImage() async {
@@ -60,6 +64,7 @@ class _UpdateTaskState extends State<UpdateItem> {
         title = doc.data['title'];
         subtitle = doc.data['subtitle'];
         image = doc.data['image'];
+        description = doc.data['description'];
       });
       print("title: ${doc.data['title']} ");
       print("subtitile : ${doc.data['subtitile']} ");
@@ -72,6 +77,7 @@ class _UpdateTaskState extends State<UpdateItem> {
     Map<String, dynamic> tasks = {
       "title": title,
       "subtitle": subtitle,
+      "description": description
     };
     ds.updateData(tasks).whenComplete(() {
       Navigator.push(
@@ -84,7 +90,7 @@ class _UpdateTaskState extends State<UpdateItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: true,
       body: Column(
         children: <Widget>[
           _myAppBar(),
@@ -113,6 +119,14 @@ class _UpdateTaskState extends State<UpdateItem> {
                       getSubtitle(subtitle);
                     },
                     decoration: InputDecoration(labelText: subtitle),
+                  ),
+                ), Padding(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: TextField(
+                    onChanged: (String description) {
+                      getDescription(description);
+                    },
+                    decoration: InputDecoration(labelText: description),
                   ),
                 ),
                 Row(
@@ -145,6 +159,7 @@ class _UpdateTaskState extends State<UpdateItem> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 
