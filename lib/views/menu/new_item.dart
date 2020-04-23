@@ -202,9 +202,6 @@ class _NewTaskState extends State<Item> {
           ],
         ),
       ),
-
-
-      bottomNavigationBar: BottomNavigation(),
     );
   }
 

@@ -199,10 +199,6 @@ class _UpdateTaskState extends State<UpdateItem> {
           ],
         ),
       ),
-
-
-
-      bottomNavigationBar: BottomNavigation(),
     );
   }
 
