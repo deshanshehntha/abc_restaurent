@@ -16,24 +16,28 @@ class UpdateItem extends StatefulWidget {
 }
 
 class _UpdateTaskState extends State<UpdateItem> {
-  String title, subtitle, image, description;
+  String title, subtitle, image, description, price;
   bool isImageLoaded = false;
   File imageFile;
 
-  getTitle(title) {
+  setTitle(title) {
     this.title = title;
   }
 
-  getSubtitle(subtitle) {
+  setSubtitle(subtitle) {
     this.subtitle = subtitle;
   }
 
-  getImage(image) {
+  setImage(image) {
     this.image = image;
   }
 
-  getDescription(description) {
+  setDescription(description) {
     this.description = description;
+  }
+
+  setPrice(price) {
+    this.price = price;
   }
 
   Future chooseImage() async {
@@ -65,6 +69,7 @@ class _UpdateTaskState extends State<UpdateItem> {
         subtitle = doc.data['subtitle'];
         image = doc.data['image'];
         description = doc.data['description'];
+        price = doc.data['price'];
       });
       print("title: ${doc.data['title']} ");
       print("subtitile : ${doc.data['subtitile']} ");
@@ -77,7 +82,8 @@ class _UpdateTaskState extends State<UpdateItem> {
     Map<String, dynamic> tasks = {
       "title": title,
       "subtitle": subtitle,
-      "description": description
+      "description": description,
+      "price": price
     };
     ds.updateData(tasks).whenComplete(() {
       Navigator.push(
@@ -116,7 +122,7 @@ class _UpdateTaskState extends State<UpdateItem> {
                       padding: EdgeInsets.only(left: 16.0, right: 16.0),
                       child: TextField(
                         onChanged: (String title) {
-                          getTitle(title);
+                          setTitle(title);
                         },
                         decoration: InputDecoration(labelText: title),
                       ),
@@ -127,7 +133,7 @@ class _UpdateTaskState extends State<UpdateItem> {
                       padding: EdgeInsets.only(left: 16.0, right: 16.0),
                       child: TextField(
                         onChanged: (String subtitle) {
-                          getSubtitle(subtitle);
+                          setSubtitle(subtitle);
                         },
                         decoration: InputDecoration(labelText: subtitle),
                       ),
@@ -137,9 +143,20 @@ class _UpdateTaskState extends State<UpdateItem> {
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     child: TextField(
                       onChanged: (String description) {
-                        getDescription(description);
+                        setDescription(description);
                       },
                       decoration: InputDecoration(labelText: description),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: TextField(
+                        onChanged: (String price) {
+                          setPrice(price);
+                        },
+                        decoration: InputDecoration(labelText: price),
+                      ),
                     ),
                   ),
                   SizedBox(

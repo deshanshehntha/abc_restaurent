@@ -15,24 +15,28 @@ class Item extends StatefulWidget {
 }
 
 class _NewTaskState extends State<Item> {
-  String title, subtitle, image, description;
+  String title, subtitle, image, description, price;
   bool isImageLoaded = false;
   File imageFile;
 
-  getTitle(title) {
+  setTitle(title) {
     this.title = title;
   }
 
-  getSubtitle(subtitle) {
+  setSubtitle(subtitle) {
     this.subtitle = subtitle;
   }
 
-  getImage(image) {
+  setImage(image) {
     this.image = image;
   }
 
-  getDescription(description) {
+  setDescription(description) {
     this.description = description;
+  }
+
+  setPrice(price) {
+    this.price = price;
   }
 
   Future chooseImage() async{
@@ -63,7 +67,8 @@ class _NewTaskState extends State<Item> {
         "title" : title,
         "subtitle" : subtitle,
         "image" : fileURL,
-        "description": description
+        "description": description,
+        "price": price
       };
       ds.setData(tasks).whenComplete(() {
         Navigator.push(context,
@@ -80,7 +85,7 @@ class _NewTaskState extends State<Item> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -124,7 +129,7 @@ class _NewTaskState extends State<Item> {
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     child: TextField(
                       onChanged: (String title) {
-                        getTitle(title);
+                        setTitle(title);
                       },
                       decoration: InputDecoration(labelText: "Title"),
                     ),
@@ -134,7 +139,7 @@ class _NewTaskState extends State<Item> {
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     child: TextField(
                       onChanged: (String subtitle) {
-                        getSubtitle(subtitle);
+                        setSubtitle(subtitle);
                       },
                       decoration: InputDecoration(labelText: "Subtitle"),
                     ),
@@ -144,14 +149,26 @@ class _NewTaskState extends State<Item> {
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     child: TextField(
                       onChanged: (String description) {
-                        getDescription(description);
+                        setDescription(description);
                       },
                       decoration: InputDecoration(labelText: "Description"),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: TextField(
+                      onChanged: (String price) {
+                        setPrice(price);
+                      },
+                      decoration: InputDecoration(labelText: "Price"),
+                    ),
+                  ),
 
                   SizedBox(
-                    height: 30,
+                    height: MediaQuery
+                        .of(context)
+                        .viewInsets
+                        .bottom,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -177,12 +194,6 @@ class _NewTaskState extends State<Item> {
                         ),
                       )
                     ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery
-                        .of(context)
-                        .viewInsets
-                        .bottom,
                   ),
                 ],
               ),
