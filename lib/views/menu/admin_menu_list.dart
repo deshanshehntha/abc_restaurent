@@ -1,3 +1,4 @@
+import 'package:awesome_project/views/menu/update_menu_item.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,7 +34,6 @@ class _MenuListState extends State<MenuList> {
     _showDialog();
   }
 
-  // user defined function
   void _showDialog() {
     // flutter defined function
     showDialog(
@@ -147,7 +147,14 @@ class _MenuListState extends State<MenuList> {
                                             'Edit'
                                         ),
                                         onPressed: () {
-
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      UpdateItem(
+                                                          id: '${mypost['title']}'),
+                                                  fullscreenDialog: true
+                                              )
+                                          );
                                         },
                                       ),
                                     ),

@@ -6,15 +6,17 @@ import 'admin_menu_list.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class Item extends StatefulWidget {
-  Item();
+class UpdateItem extends StatefulWidget {
+  final String id;
+
+  UpdateItem({this.id});
 
   @override
-  _NewTaskState createState() => _NewTaskState();
+  _UpdateTaskState createState() => _UpdateTaskState();
 }
 
-class _NewTaskState extends State<Item> {
-  String title, subtitle, image, description;
+class _UpdateTaskState extends State<UpdateItem> {
+  String title, subtitle, image;
   bool isImageLoaded = false;
   File imageFile;
 
@@ -30,12 +32,8 @@ class _NewTaskState extends State<Item> {
     this.image = image;
   }
 
-  getDescription(description) {
-    this.description = description;
-  }
-
-  Future chooseImage() async{
-    await ImagePicker.pickImage(source: ImageSource.gallery).then((img){
+  Future chooseImage() async {
+    await ImagePicker.pickImage(source: ImageSource.gallery).then((img) {
       setState(() {
         image = img.path;
         isImageLoaded = true;
@@ -44,36 +42,43 @@ class _NewTaskState extends State<Item> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    loadItemData();
+  }
 
-  createData() async{
+  loadItemData() async {
+    print("id");
 
-    StorageReference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('chats/${image.split('/').last}');
-    StorageUploadTask uploadTask = storageReference.putFile(imageFile);
-
-    await uploadTask.onComplete;
-    print('File Uploaded');
-
-    storageReference.getDownloadURL().then((fileURL) {
-
-      DocumentReference ds = Firestore.instance.collection("post").document(title);
-      Map<String,dynamic> tasks = {
-        "title" : title,
-        "subtitle" : subtitle,
-        "image" : fileURL,
-        "description": description
-      };
-      ds.setData(tasks).whenComplete(() {
-        Navigator.push(context,
-            MaterialPageRoute(
-                builder: (context) => MenuList(),
-                fullscreenDialog: true
-            )
-        );
+    await Firestore.instance
+        .collection("post")
+        .document(widget.id)
+        .get()
+        .then((DocumentSnapshot doc) {
+      setState(() {
+        title = doc.data['title'];
+        subtitle = doc.data['subtitle'];
+        image = doc.data['image'];
       });
+      print("title: ${doc.data['title']} ");
+      print("subtitile : ${doc.data['subtitile']} ");
     });
+  }
 
+  createData() async {
+    DocumentReference ds =
+        Firestore.instance.collection("post").document(title);
+    Map<String, dynamic> tasks = {
+      "title": title,
+      "subtitle": subtitle,
+    };
+    ds.updateData(tasks).whenComplete(() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MenuList(), fullscreenDialog: true));
+    });
   }
 
   @override
@@ -88,57 +93,26 @@ class _NewTaskState extends State<Item> {
             height: MediaQuery.of(context).size.height - 200,
             child: ListView(
               children: <Widget>[
-
-                isImageLoaded ?
                 Container(
-                    child: isImageLoaded ? Image.asset(image) : null
-                )
-                :
-                Container(
-
+                  // padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Image.network(image),
                 ),
-
-                Container(
-                   // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: FlatButton.icon(
-                      color: Colors.white,
-                      icon: Icon(Icons.add_photo_alternate), //`Icon` to display
-                      label: Text(
-                          'Upload image'
-                      ),
-                      onPressed: () {
-                        chooseImage();
-                      },
-                    ),
-                ),
-
                 Padding(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: TextField(
                     onChanged: (String title) {
                       getTitle(title);
                     },
-                    decoration: InputDecoration(labelText: "Title"),
+                    decoration: InputDecoration(labelText: title),
                   ),
                 ),
-                
                 Padding(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: TextField(
                     onChanged: (String subtitle) {
                       getSubtitle(subtitle);
                     },
-                    decoration: InputDecoration(labelText: "Subtitle"),
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String description) {
-                      getDescription(description);
-                    },
-                    decoration: InputDecoration(labelText: "Description"),
+                    decoration: InputDecoration(labelText: subtitle),
                   ),
                 ),
                 Row(
@@ -166,16 +140,13 @@ class _NewTaskState extends State<Item> {
                     )
                   ],
                 )
-
               ],
             ),
           ),
-
         ],
       ),
     );
   }
-
 
   Widget _myAppBar() {
     return AppBar(
@@ -187,7 +158,7 @@ class _NewTaskState extends State<Item> {
       ),
       title: Container(
         alignment: Alignment.center,
-        child: Text("ABC Resturant", style: TextStyle()),
+        child: Text("Update Menu Item", style: TextStyle()),
       ),
       actions: <Widget>[
         IconButton(

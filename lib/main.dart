@@ -7,6 +7,7 @@ import 'views/menu/admin_menu_list.dart';
 import 'views/menu/customer_menu_list.dart';
 import 'views/menu/new_item.dart';
 import 'views/user/user_profile.dart';
+import 'views/menu/update_menu_item.dart';
 
 /// This is  the main class of the appication
 /// This class contains the routers and
@@ -14,7 +15,7 @@ import 'views/user/user_profile.dart';
 
 /// Main routes of the application
 void main() => runApp(MaterialApp(
-  initialRoute: '/menu_list',
+  initialRoute: '/login',
   routes: {
     '/': (context) => MyApp(),
     '/menu_list': (context) => MyApp(),
@@ -22,7 +23,10 @@ void main() => runApp(MaterialApp(
     '/register': (context) => Register(),
     '/new_item': (context) => Item(),
     '/user_profile': (context) => UserProfile(),
-    '/customer_menus_list': (context) => CustomerMenuList()
+    '/customer_menus_list': (context) => CustomerMenuList(),
+    '/updateItem': (context) => UpdateItem()
+
+
   },
 ));
 
