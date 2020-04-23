@@ -90,75 +90,101 @@ class _UpdateTaskState extends State<UpdateItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
-      body: Column(
-        children: <Widget>[
-          _myAppBar(),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 200,
-            child: ListView(
-              children: <Widget>[
-                Container(
-                  // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: Image.network(image),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String title) {
-                      getTitle(title);
-                    },
-                    decoration: InputDecoration(labelText: title),
+      resizeToAvoidBottomPadding: false,
+
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _myAppBar(),
+            Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height - 10,
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    // padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Image.network(image),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String subtitle) {
-                      getSubtitle(subtitle);
-                    },
-                    decoration: InputDecoration(labelText: subtitle),
-                  ),
-                ), Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: TextField(
-                    onChanged: (String description) {
-                      getDescription(description);
-                    },
-                    decoration: InputDecoration(labelText: description),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    RaisedButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(color: Colors.white),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: TextField(
+                        onChanged: (String title) {
+                          getTitle(title);
+                        },
+                        decoration: InputDecoration(labelText: title),
                       ),
                     ),
-                    RaisedButton(
-                      color: Colors.redAccent,
-                      onPressed: () {
-                        createData();
-                      },
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
+                  ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: TextField(
+                        onChanged: (String subtitle) {
+                          getSubtitle(subtitle);
+                        },
+                        decoration: InputDecoration(labelText: subtitle),
                       ),
-                    )
-                  ],
-                )
-              ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: TextField(
+                      onChanged: (String description) {
+                        getDescription(description);
+                      },
+                      decoration: InputDecoration(labelText: description),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery
+                        .of(context)
+                        .viewInsets
+                        .bottom,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      RaisedButton(
+                        color: Colors.blue,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      RaisedButton(
+                        color: Colors.redAccent,
+                        onPressed: () {
+                          createData();
+                        },
+                        child: const Text(
+                          "Submit",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+
+
+
       bottomNavigationBar: BottomNavigation(),
     );
   }
