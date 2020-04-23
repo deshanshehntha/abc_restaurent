@@ -16,9 +16,9 @@ import 'views/menu/description_page.dart';
 
 /// Main routes of the application
 void main() => runApp(MaterialApp(
-  initialRoute: '/login',
+  initialRoute: '/customer_menus_list',
   routes: {
-    '/': (context) => MyApp(),
+
     '/menu_list': (context) => MyApp(),
     '/login': (context) => Login(),
     '/register': (context) => Register(),
@@ -62,3 +62,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+//'/': (context) => MyApp(),

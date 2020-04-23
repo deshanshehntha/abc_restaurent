@@ -45,6 +45,8 @@ class _DescriptionState extends State<DescriptionPage> {
 
   loadItemData() async {
     print("id");
+    print("The id : " + widget.id);
+
 
     await Firestore.instance
         .collection("post")
@@ -80,7 +82,8 @@ class _DescriptionState extends State<DescriptionPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: Text(
-                    title,
+                    title != null ?  title : "",
+
                     style: TextStyle(
                         fontSize: 30,
                         foreground: Paint()
@@ -94,7 +97,7 @@ class _DescriptionState extends State<DescriptionPage> {
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: Image.network(image),
+                  child: image != null ?  Image.network(image) : Text("No image to display")
                 ),
                 SizedBox(
                   height: 20,
@@ -102,7 +105,7 @@ class _DescriptionState extends State<DescriptionPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: Text(
-                    subtitle,
+                    subtitle != null ? subtitle : "",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -118,7 +121,7 @@ class _DescriptionState extends State<DescriptionPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: Text(
-                    description,
+                    description != null ? subtitle : "",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
                   ),
                 ),
