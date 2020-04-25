@@ -9,6 +9,7 @@ import 'views/menu/new_item.dart';
 import 'views/user/user_profile.dart';
 import 'views/menu/update_menu_item.dart';
 import 'views/menu/description_page.dart';
+import 'views/order/order_list.dart';
 
 /// This is  the main class of the appication
 /// This class contains the routers and
@@ -26,7 +27,8 @@ void main() => runApp(MaterialApp(
     '/user_profile': (context) => UserProfile(),
     '/customer_menus_list': (context) => CustomerMenuList(),
     '/updateItem': (context) => UpdateItem(),
-    '/description_page': (context) => DescriptionPage()
+    '/description_page': (context) => DescriptionPage(),
+    '/orders': (context) => OrderList()
 
   },
 ));
@@ -41,8 +43,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Post App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.amberAccent),
-        home: MenuList(title: 'Flutter Post'),
+        home: Register(),
       ),
+
       title: new Text(
         'Abc Resturant',
         style: new TextStyle(
@@ -55,6 +58,7 @@ class MyApp extends StatelessWidget {
         ),
         textAlign: TextAlign.center,
       ),
+
       imageBackground: new AssetImage("assets/images/background.jpg"),
       backgroundColor: Colors.amber,
       styleTextUnderTheLoader: new TextStyle(),

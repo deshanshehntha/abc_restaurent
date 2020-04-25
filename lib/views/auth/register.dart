@@ -76,97 +76,228 @@ class _RegisterState extends State<Register> {
         title : Text('Register'),
         elevation: 0,
       ),
-      body:  Container(
-        padding: EdgeInsets.all(16.0),
-        child:  Form(
-          key : formKey,
-          child:  Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-
-
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Firstname'
-                ),
-                validator: (
-                        (value)=> value.isEmpty ? 'Firstname cannot be empty ' : null
-                ),
-
-                onSaved: (value) => firstName = value.trim(),
-              ),
-
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Lastname'
-                ),
-                validator: (
-                        (value)=> value.isEmpty ? 'Lastname cannot be empty ' : null
-                ),
-
-                onSaved: (value) => lastName = value.trim(),
-              ),
-
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Email'
-                ),
-                validator: (
-                        (value)=> value.isEmpty ? 'Email cannot be empty ' : null
-                ),
-
-                onSaved: (value) => email = value.trim(),
-              ),
-
-
-              TextFormField(
-                decoration: new InputDecoration(
-                  labelText: 'Password',
-                ),
-                validator: (
-                        (value)=> value.isEmpty ? 'Paswword cannot be empty ' : null
-                ),
-                onSaved: (value) => password = value.trim(),
-                obscureText: true,
-              ),
-
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Telephone'
-                ),
-                validator: (
-                        (value)=> value.isEmpty ? 'Telephone cannot be empty ' : null
-                ),
-
-                onSaved: (value) => telephone = value.trim(),
-              ),
-
-              RaisedButton(
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                      fontSize: 20.0
-                  ),
-                ),
-
-                onPressed: validateAndSubmit,
-              ),
-
-              RaisedButton(
-                child: Text(
-                  'Login to Account',
-                  style: TextStyle(
-                      fontSize: 20.0
-                  ),
-                ),
-
-                onPressed: toLogin,
-              )
-
-            ],
+      body: SingleChildScrollView(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage('assets/images/intro_background.jpg'),
+                fit: BoxFit.fill),
           ),
-        ),
-      ),
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child:  Form(
+              key : formKey,
+              child:  Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 90, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+
+                      child: Image(
+                        image : AssetImage('assets/images/main_logo.png'),
+                        width: 90,
+                        height: 90,
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "First Name",
+                            filled: true,
+                            hoverColor: Colors.grey,
+                            fillColor: Colors.white,
+                            focusColor: Colors.grey,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            prefixIcon: new Icon(Icons.person_pin)
+
+                        ),
+
+                        validator: (
+                                (value)=> value.isEmpty ? 'Firstname cannot be empty ' : null
+                        ),
+
+                        onSaved: (value) => firstName = value.trim(),
+
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "Last Name",
+                            filled: true,
+                            hoverColor: Colors.grey,
+                            fillColor: Colors.white,
+                            focusColor: Colors.grey,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            prefixIcon: new Icon(Icons.person_pin)
+
+                        ),
+
+                        validator: (
+                                (value)=> value.isEmpty ? 'Last cannot be empty ' : null
+                        ),
+
+                        onSaved: (value) => lastName = value.trim(),
+
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "Email",
+                            filled: true,
+                            hoverColor: Colors.grey,
+                            fillColor: Colors.white,
+                            focusColor: Colors.grey,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            prefixIcon: new Icon(Icons.mail)
+
+                        ),
+
+                        validator: (
+                                (value)=> value.isEmpty ? 'Email cannot be empty ' : null
+                        ),
+
+                        onSaved: (value) => email = value.trim(),
+
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "Password",
+                            filled: true,
+                            hoverColor: Colors.grey,
+                            fillColor: Colors.white,
+                            focusColor: Colors.grey,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            prefixIcon: new Icon(Icons.vpn_key)
+
+                        ),
+
+                        validator: (
+                                (value)=> value.isEmpty ? 'Password cannot be empty ' : null
+                        ),
+
+                        onSaved: (value) => password = value.trim(),
+                        obscureText: true,
+                      ),
+                    ),
+
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "Telephone",
+                            filled: true,
+                            hoverColor: Colors.grey,
+                            fillColor: Colors.white,
+                            focusColor: Colors.grey,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            prefixIcon: new Icon(Icons.phone)
+
+                        ),
+
+                        validator: (
+                                (value)=> value.isEmpty ? 'Telephone cannot be empty ' : null
+                        ),
+
+                        onSaved: (value) => telephone = value.trim(),
+
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: RaisedButton(
+                        color: Colors.amberAccent,
+                        padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+                        onPressed: validateAndSubmit,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Register",
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color : Colors.black54,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
+                        shape: StadiumBorder(),
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                      padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                      child: RaisedButton(
+                        color: Colors.black54,
+                        padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+                        onPressed: toLogin,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Login to Account",
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color : Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
+                        shape: StadiumBorder(),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
+          ),
+        )
+      )
     );
   }
 }
