@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../navbar/bottom_navigation.dart';
+import '../navbar/admin_bottom_navigation.dart';
 import 'new_item.dart';
 
 class MenuList extends StatefulWidget {
@@ -239,7 +239,7 @@ class _MenuListState extends State<MenuList> {
         backgroundColor: Colors.blue[600],
       ),
 
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: AdminBottomNavigation(input: 0),
     );
   }
 

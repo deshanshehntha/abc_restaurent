@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:awesome_project/views/navbar/admin_bottom_navigation.dart';
+import 'package:awesome_project/views/navbar/customer_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +20,7 @@ class _UserProfileState extends State<UserProfile> {
   String telephone;
   String imageUrl;
   String uid;
+  String type;
 
 
   //edit section
@@ -152,31 +155,39 @@ class _UserProfileState extends State<UserProfile> {
           ),
         ),
         backgroundColor: Colors.blue[300],
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 90,
-                  backgroundImage : imageUrl == null ?   NetworkImage('https://picsum.photos/200') : NetworkImage(imageUrl)
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: FlatButton.icon(
-                    color: Colors.white,
-                    icon: Icon(Icons.add_photo_alternate), //`Icon` to display
-                    label: Text(
-                        'Upload your image'
-                    ),
-                    onPressed: () {
-                      chooseImage();
-                    },
+        body: DecoratedBox(
+          position: DecorationPosition.background,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage('assets/images/intro_background.jpg'),
+                fit: BoxFit.cover),
+          ),
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircleAvatar(
+                      radius: 90,
+                      backgroundImage : imageUrl == null ?   NetworkImage('https://picsum.photos/200') : NetworkImage(imageUrl)
                   ),
-                ),
 
-                /*
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: FlatButton.icon(
+                      color: Colors.white,
+                      icon: Icon(Icons.add_photo_alternate), //`Icon` to display
+                      label: Text(
+                          'Upload your image'
+                      ),
+                      onPressed: () {
+                        chooseImage();
+                      },
+                    ),
+                  ),
+
+                  /*
                 Text(
                   'Welcome',
                   style: TextStyle(
@@ -188,50 +199,59 @@ class _UserProfileState extends State<UserProfile> {
                 ),
 
                  */
-                SizedBox(
-                  height: 20.0,
-                  width: 200,
-                  child: Divider(
-                    color: Colors.teal[100],
+                  SizedBox(
+                    height: 20.0,
+                    width: 200,
+                    child: Divider(
+                      color: Colors.teal[100],
+                    ),
                   ),
-                ),
-                Text("Tap on the fields that you want to edit"),
-                Card(
+                  Text(
+                      "Tap on the fields that you want to edit",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                    ),
+                  ),
+                  Card(
+                      color: Colors.white,
+                      margin:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.person_pin,
+                          color: Colors.teal[900],
+                        ),
+                        title: Text(
+                          '$firstName $lastName',
+                          style:
+                          TextStyle(fontSize: 20.0),
+                        ),
+                        onTap: ()=> displayNameEditDialog(context),
+                      )),
+                  Card(
                     color: Colors.white,
-                    margin:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                     child: ListTile(
                       leading: Icon(
-                        Icons.person_pin,
+                        Icons.phone,
                         color: Colors.teal[900],
                       ),
                       title: Text(
-                        '$firstName $lastName',
-                        style:
-                        TextStyle(fontSize: 20.0),
+                        '$telephone',
+                        style: TextStyle(fontSize: 20.0),
                       ),
-                      onTap: ()=> displayNameEditDialog(context),
-                    )),
-                Card(
-                  color: Colors.white,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.phone,
-                      color: Colors.teal[900],
+                      onTap: () => displayTelephoneEditDialog(context),
                     ),
-                    title: Text(
-                      '$telephone',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    onTap: () => displayTelephoneEditDialog(context),
-                  ),
 
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
+
+      bottomNavigationBar: type == "admin" ? AdminBottomNavigation(input: 1) : CustomerBottomNavigation(input : 1),
 
     );
 
