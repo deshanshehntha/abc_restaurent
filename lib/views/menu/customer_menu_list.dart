@@ -118,7 +118,6 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-
         title: Container(
           alignment: Alignment.center,
           child: Text("ABC Resturant", style: TextStyle()),

@@ -99,106 +99,156 @@ class _UpdateTaskState extends State<UpdateItem> {
       resizeToAvoidBottomPadding: false,
 
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _myAppBar(),
-            Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height - 10,
-              child: ListView(
-                children: <Widget>[
-                  Container(
-                    // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Image.network(image),
-                  ),
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: TextField(
-                        onChanged: (String title) {
-                          setTitle(title);
-                        },
-                        decoration: InputDecoration(labelText: title),
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: TextField(
-                        onChanged: (String subtitle) {
-                          setSubtitle(subtitle);
-                        },
-                        decoration: InputDecoration(labelText: subtitle),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String description) {
-                        setDescription(description);
-                      },
-                      decoration: InputDecoration(labelText: description),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: TextField(
-                        onChanged: (String price) {
-                          setPrice(price);
-                        },
-                        decoration: InputDecoration(labelText: price),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.red,
+              image: DecorationImage(
+                  image: AssetImage('assets/images/orderback.jpg'),
+                  fit: BoxFit.fill),
+            ),
+            child: Column(
+              children: <Widget>[
+                _myAppBar(),
+                Container(
+                    padding: EdgeInsets.all(16.0),
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     height: MediaQuery
                         .of(context)
-                        .viewInsets
-                        .bottom,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      RaisedButton(
-                        color: Colors.blue,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          createData();
-                        },
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
+                        .size
+                        .height - 10,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      color: Colors.amber.withOpacity(0.7),
+                    ),
+                    child: SingleChildScrollView(
+
+                        child: Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height - 10,
+                          child: ListView(
+                            children: <Widget>[
+                              Container(
+                                // padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                                child: Image.network(image),
+                              ),
+                              SingleChildScrollView(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0, right: 16.0),
+                                  child: TextField(
+                                    onChanged: (String title) {
+                                      setTitle(title);
+                                    },
+                                    decoration: InputDecoration(
+                                        labelText: title),
+                                  ),
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0, right: 16.0),
+                                  child: TextField(
+                                    onChanged: (String subtitle) {
+                                      setSubtitle(subtitle);
+                                    },
+                                    decoration: InputDecoration(
+                                        labelText: subtitle,
+                                        focusColor: Colors.black,
+                                        hoverColor: Colors.black,
+                                        hintStyle: TextStyle(
+                                            color: Colors.black
+                                        )
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16.0,
+                                    right: 16.0),
+                                child: TextField(
+                                  onChanged: (String description) {
+                                    setDescription(description);
+                                  },
+                                  decoration: InputDecoration(
+                                      labelText: description,
+                                      focusColor: Colors.black,
+                                      hoverColor: Colors.black,
+                                      hintStyle: TextStyle(
+                                          color: Colors.black
+                                      )),
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0, right: 16.0),
+                                  child: TextField(
+                                    onChanged: (String price) {
+                                      setPrice(price);
+                                    },
+                                    decoration: InputDecoration(
+                                        labelText: price,
+                                        focusColor: Colors.black,
+                                        hoverColor: Colors.black,
+                                        hintStyle: TextStyle(
+                                            color: Colors.black
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: MediaQuery
+                                    .of(context)
+                                    .viewInsets
+                                    .bottom,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceEvenly,
+                                children: <Widget>[
+                                  RaisedButton(
+                                    color: Colors.blue,
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      "Cancel",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  RaisedButton(
+                                    color: Colors.redAccent,
+                                    onPressed: () {
+                                      createData();
+                                    },
+                                    child: const Text(
+                                      "Submit",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                    )
+                ),
+              ],
+
             ),
-          ],
-        ),
+          )
       ),
+      bottomNavigationBar: AdminBottomNavigation(input: 0),
     );
   }
 
@@ -206,9 +256,7 @@ class _UpdateTaskState extends State<UpdateItem> {
     return AppBar(
       leading: IconButton(
         icon: Icon(FontAwesomeIcons.bars),
-        onPressed: () {
-          Navigator.pop(context);
-        },
+
       ),
       title: Container(
         alignment: Alignment.center,
