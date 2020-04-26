@@ -1,3 +1,7 @@
+import 'package:awesome_project/views/auth/register.dart';
+import 'package:awesome_project/views/menu/admin_menu_list.dart';
+import 'package:awesome_project/views/menu/customer_menu_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +16,46 @@ class _LoginState extends State<Login> {
 
   String email;
   String password;
+  String uid;
+  String type;
+
+  redirectUser() async{
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+
+    if( user.uid != null ){
+      print("user not null");
+
+      await Firestore.instance.collection("user").document(user.uid).get()
+          .then((DocumentSnapshot doc){
+
+        setState(() {
+          uid = user.uid;
+          type = doc.data['type'];
+        });
+
+        if( type == "admin" ){
+          Navigator.of(context).pop();
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => MenuList()
+              )
+          );
+        }else{
+          Navigator.of(context).pop();
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => CustomerMenuList()
+              )
+          );
+        }
+
+      });
+
+    }else{
+      print("user null");
+    }
+
+  }
 
   bool validateAndSave(){
     final form = formKey.currentState;
@@ -26,23 +70,23 @@ class _LoginState extends State<Login> {
     }
   }
 
-  void getLoggedUser() async{
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
-    print('Signed in user  ${user.uid} ');
-  }
 
   @override
   void initState() {
 
     super.initState();
 
-    getLoggedUser();
-
   }
 
   void toRegister(){
-    Navigator.pushNamed(context, '/register');
+    Navigator.of(context).pop();
+    Navigator.push(context,
+        MaterialPageRoute(
+            builder: (context) => Register()
+        )
+    );
+
   }
 
   void validateAndSubmit() async {
@@ -54,8 +98,7 @@ class _LoginState extends State<Login> {
 
         print('Signed in ${user.uid} ');
 
-        Navigator.of(context).pop();
-        Navigator.pushNamed(context, '/menu_list');
+        redirectUser();
       }catch(e){
         print('Exception : $e' );
       }

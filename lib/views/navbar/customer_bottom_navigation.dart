@@ -1,18 +1,31 @@
 import 'package:awesome_project/views/menu/admin_menu_list.dart';
+import 'package:awesome_project/views/menu/customer_menu_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../menu/new_item.dart';
 import '../user/user_profile.dart';
 import '../auth/login.dart';
 
-class BottomNavigation extends StatefulWidget {
+class CustomerBottomNavigation extends StatefulWidget {
+
+  final int input;
+
+  CustomerBottomNavigation({Key key, this.input}) : super(key : key);
+
   @override
-  _BottomNavigationState createState() => _BottomNavigationState();
+  _CustomerBottomNavigationState createState() => _CustomerBottomNavigationState( input );
 }
 
-class _BottomNavigationState extends State<BottomNavigation> {
+class _CustomerBottomNavigationState extends State<CustomerBottomNavigation> {
 
   int currIndex = 0;
+
+  _CustomerBottomNavigationState( int input ){
+    print(input);
+
+    currIndex = input;
+  }
+
   final List<Widget> children = [];
 
   void signOutUser() async{
@@ -24,10 +37,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
       currIndex = index;
     });
 
+
     switch(index){
       case 0 :  Navigator.push(context,
           MaterialPageRoute(
-              builder: (context) => MenuList(),
+              builder: (context) => CustomerMenuList(),
               fullscreenDialog: true
           )
       );
@@ -67,6 +81,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
 
         ),
+
+
 
         BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),

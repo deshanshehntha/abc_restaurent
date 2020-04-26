@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -17,24 +19,53 @@ import 'views/order/order_list.dart';
 
 /// Main routes of the application
 void main() => runApp(MaterialApp(
-  initialRoute: '/customer_menus_list',
+  initialRoute: '/',
   routes: {
-
-    '/menu_list': (context) => MyApp(),
-    '/login': (context) => Login(),
-    '/register': (context) => Register(),
-    '/new_item': (context) => Item(),
-    '/user_profile': (context) => UserProfile(),
-    '/customer_menus_list': (context) => CustomerMenuList(),
-    '/updateItem': (context) => UpdateItem(),
-    '/description_page': (context) => DescriptionPage(),
-    '/orders': (context) => OrderList()
-
+    '/': (context) => MyApp(),
   },
 ));
 
 /// Main class of the application This contains the splash screen too
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  String uid;
+  String type;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUser();
+  }
+
+  loadUser() async{
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+
+    if( user.uid != null ){
+      print("user not null");
+
+      await Firestore.instance.collection("user").document(user.uid).get()
+          .then((DocumentSnapshot doc){
+
+        setState(() {
+          uid = user.uid;
+          type = doc.data['type'];
+        });
+
+        print(type);
+
+      });
+
+    }else{
+      print("user null");
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(
@@ -43,7 +74,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Post App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.amberAccent),
-        home: Register(),
+        home: uid == null ? Register() : type == "admin" ?  MenuList() : CustomerMenuList(),
       ),
 
       title: new Text(
@@ -66,6 +97,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 
 //'/': (context) => MyApp(),

@@ -1,4 +1,5 @@
-import 'package:awesome_project/views/navbar/bottom_navigation.dart';
+import 'package:awesome_project/views/navbar/admin_bottom_navigation.dart';
+import 'package:awesome_project/views/navbar/customer_bottom_navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -158,7 +159,7 @@ class _OrderListState extends State<OrderList> {
         ),
 
       ),
-      bottomNavigationBar: BottomNavigation(),
+
     );
   }
 }

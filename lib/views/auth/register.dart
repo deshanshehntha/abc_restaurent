@@ -1,6 +1,8 @@
+import 'package:awesome_project/views/auth/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../menu/customer_menu_list.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -31,7 +33,11 @@ class _RegisterState extends State<Register> {
   }
 
   void toLogin(){
-    Navigator.pushNamed(context, '/login');
+    Navigator.push(context,
+        MaterialPageRoute(
+            builder: (context) => Login()
+        )
+    );
   }
 
   void validateAndSubmit() async {
@@ -44,6 +50,14 @@ class _RegisterState extends State<Register> {
         print('Signed in ${user.uid} ');
 
         saveUserDetails(user.uid);
+
+        Navigator.push(context,
+            MaterialPageRoute(
+              builder: (context) => CustomerMenuList()
+            )
+        );
+        Navigator.of(context).pop();
+
       }catch(e){
         print('Exception : $e' );
       }

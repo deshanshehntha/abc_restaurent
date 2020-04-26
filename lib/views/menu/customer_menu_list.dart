@@ -1,12 +1,14 @@
 import 'dart:collection';
 
+import 'package:awesome_project/views/navbar/customer_bottom_navigation.dart';
+import 'package:awesome_project/views/order/order_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../navbar/bottom_navigation.dart';
+import '../navbar/admin_bottom_navigation.dart';
 import 'new_item.dart';
 import '../order/cart.dart';
 import '../../util/Generator.dart';
@@ -116,17 +118,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(FontAwesomeIcons.bars),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => Item(),
-                    fullscreenDialog: true
-                )
-            );
-          },
-        ),
+
         title: Container(
           alignment: Alignment.center,
           child: Text("ABC Resturant", style: TextStyle()),
@@ -135,8 +127,15 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
           IconButton(
             icon: Icon(FontAwesomeIcons.hamburger),
             iconSize: 20.0,
-            color: Colors.white,
-            onPressed: null,
+            color: Colors.black54,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => OrderList(),
+
+                  )
+              );
+            },
           ),
         ],
       ),
@@ -278,7 +277,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
         }
       ),
 
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: CustomerBottomNavigation(input : 0 ),
     );
   }
 
