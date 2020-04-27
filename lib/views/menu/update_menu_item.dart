@@ -99,52 +99,65 @@ class _UpdateTaskState extends State<UpdateItem> {
       resizeToAvoidBottomPadding: false,
 
       body: SingleChildScrollView(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.red,
-              image: DecorationImage(
-                  image: AssetImage('assets/images/orderback.jpg'),
-                  fit: BoxFit.fill),
-            ),
-            child: Column(
-              children: <Widget>[
-                _myAppBar(),
-                Container(
-                  padding: EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    color: Colors.amber.withOpacity(0.7),
+        child: Column(
+          children: <Widget>[
+            _myAppBar(),
+            Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height - 10,
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    // padding: EdgeInsets.only(left: 16.0, right: 16.0),
+
+                    child: image != null ? Image.network( image) : Image( image : AssetImage('assets/images/main_logo.png'),  width: 90,  height: 90, ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: Image.network(image),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: TextField(
+                        onChanged: (String title) {
+                          setTitle(title);
+                        },
+                        decoration: InputDecoration(labelText: title != null ? title : "" ),
                       ),
-                      SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                          child: TextField(
-                            onChanged: (String title) {
-                              setTitle(title);
-                            },
-                            decoration: InputDecoration(labelText: title),
-                          ),
-                        ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: TextField(
+                        onChanged: (String subtitle) {
+                          setSubtitle(subtitle);
+                        },
+                        decoration: InputDecoration(labelText: subtitle != null ? subtitle : "" ),
                       ),
-                      SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                          child: TextField(
-                            onChanged: (String subtitle) {
-                              setSubtitle(subtitle);
-                            },
-                            decoration: InputDecoration(labelText: subtitle,
-                              focusColor: Colors.black,
-                              hoverColor: Colors.black,
-                            ),
-                          ),
-                        ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: TextField(
+                      onChanged: (String description) {
+                        setDescription(description);
+                      },
+                      decoration: InputDecoration(labelText: description != null ? description : ""  ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: TextField(
+                        onChanged: (String price) {
+                          setPrice(price);
+                        },
+                        decoration: InputDecoration(labelText: price != null ? price : ""  ),
+
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 16.0, right: 16.0),

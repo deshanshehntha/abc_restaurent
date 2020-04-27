@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:awesome_project/views/navbar/admin_bottom_navigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'admin_menu_list.dart';
@@ -68,98 +69,84 @@ class _DescriptionState extends State<DescriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-          child: DecoratedBox(
-            position: DecorationPosition.background,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              image: DecorationImage(
-                  image: AssetImage('assets/images/orderback.jpg'),
-                  fit: BoxFit.cover),
-            ),
-            child:
-            Column(
-              children: <Widget>[
-                _myAppBar(),
-                Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height - 10,
-                    color: Colors.grey.withOpacity(0.5),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.amber)
-                      ),
-                      child:
-                      ListView(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                            child: Text(
-                              title != null ? title : "",
 
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  foreground: Paint()
-                                    ..style = PaintingStyle.stroke
-                                    ..strokeWidth = 2
-                                    ..color = Colors.black87),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                              child: image != null
-                                  ? Image.network(image)
-                                  : Text("No image to display")
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                            child: Text(
-                              subtitle != null ? subtitle : "",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                  foreground: Paint()
-                                    ..style = PaintingStyle.fill
-                                    ..strokeWidth = 1
-                                    ..color = Colors.orange),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                            child: Text(
-                              description != null ? description : "",
-                              style: TextStyle(fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                ),
-              ],
-            ),
-          )
+      body: DecoratedBox(
+        position: DecorationPosition.background,
+        decoration: BoxDecoration(
+          color: Colors.red,
+          image: DecorationImage(
+              image: AssetImage('assets/images/dark_back.jpg'),
+              fit: BoxFit.cover),
+        ),
+        child:Column(
+          children: <Widget>[
+            _myAppBar(),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 200,
+              child: ListView(
+                children: <Widget>[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Text(
+                      title != null ?  title : "",
 
-      ),
-      bottomNavigationBar: AdminBottomNavigation(input: 0),
+                      style: TextStyle(
+                          fontSize: 30,
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 2
+                            ..color = Colors.amber),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: image != null ?  Image.network(image) : Text("No image to display")
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Text(
+                      subtitle != null ? subtitle : "",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          foreground: Paint()
+                            ..style = PaintingStyle.fill
+                            ..strokeWidth = 1
+                            ..color = Colors.orange),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Text(
+                      description != null ? description : "",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      )
+
     );
   }
 
@@ -170,7 +157,9 @@ class _DescriptionState extends State<DescriptionPage> {
       ),
       title: Container(
         alignment: Alignment.center,
-        child: Text("Description", style: TextStyle()),
+
+        child: Text("Menu Item", style: TextStyle()),
+
       ),
       actions: <Widget>[
         IconButton(

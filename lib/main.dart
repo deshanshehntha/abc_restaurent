@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Flutter Post App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.amberAccent),
-        home: uid == null ? Register() : type == "admin" ?  MenuList() : CustomerMenuList(),
+        home: uid == null ? Login() : type == "admin" ?  MenuList() : CustomerMenuList(),
       ),
 
       title: new Text(

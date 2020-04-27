@@ -88,24 +88,31 @@ class _NewTaskState extends State<Item> {
       resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
 
-          child: DecoratedBox(
-            position: DecorationPosition.background,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              image: DecorationImage(
-                  image: AssetImage('assets/images/orderback.jpg'),
-                  fit: BoxFit.cover),
-            ),
-            child: Column(
-              children: <Widget>[
-                _myAppBar(),
-                Container(
-                  padding: EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    color: Colors.amber.withOpacity(0.7),
-                  ),
-                  child: Column(
+
+        child:DecoratedBox(
+
+        decoration: BoxDecoration(
+          color: Colors.red,
+          image: DecorationImage(
+          image: AssetImage('assets/images/item_add_bg.jpg'),
+          fit: BoxFit.contain),
+        ),
+          child: Column(
+            children: <Widget>[
+              _myAppBar(),
+              Container(
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height - 10,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView(
+
                     children: <Widget>[
 
                       isImageLoaded ?
@@ -118,56 +125,132 @@ class _NewTaskState extends State<Item> {
                       ),
 
                       Container(
-                        // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: FlatButton.icon(
-                          color: Colors.white,
-                          icon: Icon(Icons.add_photo_alternate),
-                          //`Icon` to display
-                          label: Text(
-                              'Upload image'
-                          ),
+
+                        margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+
+                        child: RaisedButton(
+                          color: Colors.amberAccent,
+                          padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
                           onPressed: () {
                             chooseImage();
                           },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.add_photo_alternate
+                              ),
+                              Text(
+                                "Upload Image",
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color : Colors.black54,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ],
+                          ),
+                          shape: StadiumBorder(),
                         ),
                       ),
 
-                      Padding(
-                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: TextField(
+
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
                           onChanged: (String title) {
                             setTitle(title);
                           },
-                          decoration: InputDecoration(labelText: "Title"),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Title",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.title)
+
+                          ),
+
                         ),
                       ),
 
-                      Padding(
-                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: TextField(
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
                           onChanged: (String subtitle) {
-                            setSubtitle(subtitle);
+                            setTitle(subtitle);
                           },
-                          decoration: InputDecoration(labelText: "Subtitle"),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Subtitle",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.text_fields)
+
+                          ),
+
                         ),
                       ),
 
-                      Padding(
-                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: TextField(
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
                           onChanged: (String description) {
-                            setDescription(description);
+                            setTitle(description);
                           },
-                          decoration: InputDecoration(labelText: "Description"),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Description",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.textsms)
+
+                          ),
+
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: TextField(
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
                           onChanged: (String price) {
-                            setPrice(price);
+                            setTitle(price);
                           },
-                          decoration: InputDecoration(labelText: "Price"),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Price",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.monetization_on)
+
+                          ),
+
                         ),
                       ),
 
@@ -177,38 +260,44 @@ class _NewTaskState extends State<Item> {
                             .viewInsets
                             .bottom,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          RaisedButton(
-                            color: Colors.blue,
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text(
-                              "Cancel",
-                              style: TextStyle(color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            RaisedButton(
+                              color: Colors.blue,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                          RaisedButton(
-                            color: Colors.redAccent,
-                            onPressed: () {
-                              createData();
-                            },
-                            child: const Text(
-                              "Submit",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                        ],
+                            RaisedButton(
+                              color: Colors.redAccent,
+                              onPressed: () {
+                                createData();
+                              },
+                              child: const Text(
+                                "Submit",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          ],
+                        ),
+
                       ),
                     ],
                   ),
                 ),
+              ),
 
-              ],
-            ),
-          )
+            ],
+          ),
+        ),
+
       ),
     );
   }
