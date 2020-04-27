@@ -91,11 +91,9 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
 
     print( cartList );
     print(netTotal);
+    
   }
 
-  void saveItemToWishlist(){
-    print(title);
-  }
 
   updateCart( String itemTitle, Cart newCart ){
 
@@ -104,6 +102,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
       title = "";
       quantity = 0;
     });
+
 
   }
 
@@ -129,6 +128,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
             iconSize: 20.0,
             color: Colors.black54,
             onPressed: () {
+
               Navigator.push(context,
                   MaterialPageRoute(
                     builder: (context) => OrderList(),
@@ -232,6 +232,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
                                               ),
                                             ),
                                             onPressed: () {
+
                                               setState(() {
                                                 title = mypost['title'];
                                               });
@@ -264,6 +265,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
 
 
 
+
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
             cartQuantity.toString()
@@ -280,6 +282,8 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
       bottomNavigationBar: CustomerBottomNavigation(input : 0 ),
     );
   }
+
+
 
     showSingleOrder(BuildContext context) {
       Size size = MediaQuery.of(context).size;
@@ -387,6 +391,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
             );
           });
     }
+
 
   displayItemAdd( BuildContext context, double amount ) async{
     return showDialog(

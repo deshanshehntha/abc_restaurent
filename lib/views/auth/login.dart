@@ -18,6 +18,7 @@ class _LoginState extends State<Login> {
   String password;
   String uid;
   String type;
+  bool isError = false;
 
   redirectUser() async{
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
@@ -77,6 +78,10 @@ class _LoginState extends State<Login> {
 
     super.initState();
 
+    setState(() {
+      isError = false;
+    });
+
   }
 
   void toRegister(){
@@ -101,6 +106,10 @@ class _LoginState extends State<Login> {
         redirectUser();
       }catch(e){
         print('Exception : $e' );
+        print(e.toString());
+        setState(() {
+          isError = true;
+        });
       }
 
     }
@@ -141,8 +150,26 @@ class _LoginState extends State<Login> {
                     ),
                   ),
 
+
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                    child: Center(
+                      child: Text(
+                        isError ? "Invalid Credentials" : "",
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
                     padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
                     child: TextFormField(
                       decoration: InputDecoration(
@@ -253,6 +280,17 @@ class _LoginState extends State<Login> {
           ),
         )
       )
+    );
+  }
+
+  void showToast(BuildContext context, String message ) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content:  Text(message),
+        action: SnackBarAction(
+            label: 'Ok', onPressed: scaffold.hideCurrentSnackBar),
+      ),
     );
   }
 }
