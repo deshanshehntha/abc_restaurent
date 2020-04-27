@@ -101,19 +101,11 @@ class _NewTaskState extends State<Item> {
                 _myAppBar(),
                 Container(
                   padding: EdgeInsets.all(16.0),
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height - 10,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     color: Colors.amber.withOpacity(0.7),
                   ),
-                  child: ListView(
+                  child: Column(
                     children: <Widget>[
 
                       isImageLoaded ?
