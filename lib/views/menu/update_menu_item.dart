@@ -115,7 +115,8 @@ class _UpdateTaskState extends State<UpdateItem> {
                 children: <Widget>[
                   Container(
                     // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Image.network(image),
+
+                    child: image != null ? Image.network( image) : Image( image : AssetImage('assets/images/main_logo.png'),  width: 90,  height: 90, ),
                   ),
                   SingleChildScrollView(
                     child: Padding(
@@ -124,7 +125,7 @@ class _UpdateTaskState extends State<UpdateItem> {
                         onChanged: (String title) {
                           setTitle(title);
                         },
-                        decoration: InputDecoration(labelText: title),
+                        decoration: InputDecoration(labelText: title != null ? title : "" ),
                       ),
                     ),
                   ),
@@ -135,7 +136,7 @@ class _UpdateTaskState extends State<UpdateItem> {
                         onChanged: (String subtitle) {
                           setSubtitle(subtitle);
                         },
-                        decoration: InputDecoration(labelText: subtitle),
+                        decoration: InputDecoration(labelText: subtitle != null ? subtitle : "" ),
                       ),
                     ),
                   ),
@@ -145,7 +146,7 @@ class _UpdateTaskState extends State<UpdateItem> {
                       onChanged: (String description) {
                         setDescription(description);
                       },
-                      decoration: InputDecoration(labelText: description),
+                      decoration: InputDecoration(labelText: description != null ? description : ""  ),
                     ),
                   ),
                   SingleChildScrollView(
@@ -155,7 +156,7 @@ class _UpdateTaskState extends State<UpdateItem> {
                         onChanged: (String price) {
                           setPrice(price);
                         },
-                        decoration: InputDecoration(labelText: price),
+                        decoration: InputDecoration(labelText: price != null ? price : ""  ),
                       ),
                     ),
                   ),

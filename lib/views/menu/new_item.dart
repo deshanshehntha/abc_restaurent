@@ -87,119 +87,211 @@ class _NewTaskState extends State<Item> {
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _myAppBar(),
-            Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height - 10,
-              child: ListView(
-                children: <Widget>[
 
-                  isImageLoaded ?
-                  Container(
-                      child: isImageLoaded ? Image.asset(image) : null
-                  )
-                      :
-                  Container(
+        child:DecoratedBox(
 
-                  ),
-
-                  Container(
-                    // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: FlatButton.icon(
-                      color: Colors.white,
-                      icon: Icon(Icons.add_photo_alternate), //`Icon` to display
-                      label: Text(
-                          'Upload image'
-                      ),
-                      onPressed: () {
-                        chooseImage();
-                      },
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String title) {
-                        setTitle(title);
-                      },
-                      decoration: InputDecoration(labelText: "Title"),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String subtitle) {
-                        setSubtitle(subtitle);
-                      },
-                      decoration: InputDecoration(labelText: "Subtitle"),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String description) {
-                        setDescription(description);
-                      },
-                      decoration: InputDecoration(labelText: "Description"),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String price) {
-                        setPrice(price);
-                      },
-                      decoration: InputDecoration(labelText: "Price"),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: MediaQuery
-                        .of(context)
-                        .viewInsets
-                        .bottom,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        decoration: BoxDecoration(
+          color: Colors.red,
+          image: DecorationImage(
+          image: AssetImage('assets/images/item_add_bg.jpg'),
+          fit: BoxFit.contain),
+        ),
+          child: Column(
+            children: <Widget>[
+              _myAppBar(),
+              Container(
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height - 10,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView(
                     children: <Widget>[
-                      RaisedButton(
-                        color: Colors.blue,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(color: Colors.white),
+
+                      isImageLoaded ?
+                      Container(
+                          child: isImageLoaded ? Image.asset(image) : null
+                      )
+                          :
+                      Container(
+
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+
+                        child: RaisedButton(
+                          color: Colors.amberAccent,
+                          padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+                          onPressed: () {
+                            chooseImage();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.add_photo_alternate
+                              ),
+                              Text(
+                                "Upload Image",
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color : Colors.black54,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ],
+                          ),
+                          shape: StadiumBorder(),
                         ),
                       ),
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          createData();
-                        },
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(color: Colors.white),
+
+
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
+                          onChanged: (String title) {
+                            setTitle(title);
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Title",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.title)
+
+                          ),
+
                         ),
-                      )
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
+                          onChanged: (String subtitle) {
+                            setTitle(subtitle);
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Subtitle",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.text_fields)
+
+                          ),
+
+                        ),
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
+                          onChanged: (String description) {
+                            setTitle(description);
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Description",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.textsms)
+
+                          ),
+
+                        ),
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+                        child: TextFormField(
+                          onChanged: (String price) {
+                            setTitle(price);
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Price",
+                              filled: true,
+                              hoverColor: Colors.grey,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0)
+                              ),
+                              prefixIcon: new Icon(Icons.monetization_on)
+
+                          ),
+
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: MediaQuery
+                            .of(context)
+                            .viewInsets
+                            .bottom,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            RaisedButton(
+                              color: Colors.blue,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            RaisedButton(
+                              color: Colors.redAccent,
+                              onPressed: () {
+                                createData();
+                              },
+                              child: const Text(
+                                "Submit",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

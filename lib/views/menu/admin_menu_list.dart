@@ -86,157 +86,183 @@ class _MenuListState extends State<MenuList> {
           ),
         ],
       ),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection('post').snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Scaffold(
-              body: Text( "Loading ... "),
-            );
-          } else {
-            return ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot mypost = snapshot.data.documents[index];
-                  String title = "";
-                  title = mypost['title'];
-                  return Stack(
-                    children: [
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          image: DecorationImage(
+              image: AssetImage('assets/images/dark_back.jpg'),
+              fit: BoxFit.fill),
+        ),
+        child: StreamBuilder(
+          stream: Firestore.instance.collection('post').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Scaffold(
+                body: Text( "Loading ... "),
+              );
+            } else {
+              return ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (context, index) {
+                    DocumentSnapshot mypost = snapshot.data.documents[index];
+                    String title = "";
+                    title = mypost['title'];
+                    return Stack(
+                      children: [
 
-                      Card(
-                        child: new Column(
-                          children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            child: new Column(
+                              children: <Widget>[
 
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            DescriptionPage(
-                                                id: title),
-                                        fullscreenDialog: true
-                                    )
-                                );
-                              },
-                              child: Text('${mypost['title']}',
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold
-                                  )
-                              ),
-                            ),
-
-                            SizedBox(
-                              height: 5,
-                            ),
-
-                            Image.network('${mypost['image']}'),
-
-                            SizedBox(
-                              height: 8,
-                            ),
-
-                            Text('${mypost['subtitle']}',
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 18.0,
-                                    fontStyle: FontStyle.italic
-                                )
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 40.0),
-                              child: FloatingActionButton.extended(
-                                heroTag: null,
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              DescriptionPage(
-                                                  id: title),
-                                          fullscreenDialog: true
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DescriptionPage(
+                                                    id: title),
+                                            fullscreenDialog: true
+                                        )
+                                    );
+                                  },
+                                  child: Text('${mypost['title']}',
+                                      style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold
                                       )
-                                  );
-                                },
-                                label: Text('${mypost['price']}'),
-                                icon: Icon(Icons.thumb_up),
-                                backgroundColor: Colors.orange,
-                              ),
-                            ),
+                                  ),
+                                ),
+
+                                SizedBox(
+                                  height: 5,
+                                ),
+
+                                Image.network('${mypost['image']}'),
+
+                                SizedBox(
+                                  height: 8,
+                                ),
+
+                                Text('${mypost['subtitle']}',
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 18.0,
+                                        fontStyle: FontStyle.italic
+                                    )
+                                ),
+
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5 ,left: 0.0),
+                                  child: FloatingActionButton.extended(
+                                    heroTag: null,
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DescriptionPage(
+                                                      id: title),
+                                              fullscreenDialog: true
+                                          )
+                                      );
+                                    },
+                                    label: Text('View'),
+                                    icon: Icon(Icons.remove_red_eye),
+                                    backgroundColor: Colors.orange,
+                                  ),
+                                ),
 
 
 
-                            Padding(
-                                padding:  EdgeInsets.all(7.0),
-                                child:  Row(
-                                  children: <Widget>[
+                                Padding(
+                                    padding:  EdgeInsets.all(7.0),
+                                    child:  Row(
+                                      children: <Widget>[
 
-                                    Padding(
-                                      padding:  EdgeInsets.all(7.0),
-                                      child:FlatButton.icon(
-                                        color: Colors.white,
-                                        icon: Icon(
-                                            Icons.edit
-                                        ), //
-                                        textColor: Colors.blueAccent,// `Icon` to display
-                                        label: Text(
-                                            'Edit'
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      UpdateItem(
-                                                          id: title),
-                                                  fullscreenDialog: true
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('Rs. ${mypost['price']}',
+                                              style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 18.0,
+                                                  fontStyle: FontStyle.italic,
+                                                  fontWeight: FontWeight.bold
                                               )
-                                          );
-                                        },
-                                      ),
-                                    ),
-
-                                    Padding(
-                                      padding:  EdgeInsets.all(7.0),
-                                      child:FlatButton.icon(
-                                        color: Colors.white,
-                                        icon: Icon(
-                                            Icons.delete_forever
-                                        ), //
-                                        textColor: Colors.redAccent,// `Icon` to display
-                                        label: Text(
-                                            'Delete'
+                                          ),
                                         ),
-                                        onPressed: () {
-                                          deleteData(snapshot, index);
-                                        },
-                                      ),
-                                    ),
+
+                                        Spacer(),
+
+                                        Padding(
+                                          padding:  EdgeInsets.all(7.0),
+                                          child:FlatButton.icon(
+                                            color: Colors.white,
+                                            icon: Icon(
+                                                Icons.edit
+                                            ), //
+                                            textColor: Colors.blueAccent,// `Icon` to display
+                                            label: Text(
+                                                'Edit'
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          UpdateItem(
+                                                              id: title),
+                                                      fullscreenDialog: true
+                                                  )
+                                              );
+                                            },
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding:  EdgeInsets.all(7.0),
+                                          child:FlatButton.icon(
+                                            color: Colors.white,
+                                            icon: Icon(
+                                                Icons.delete_forever
+                                            ), //
+                                            textColor: Colors.redAccent,// `Icon` to display
+                                            label: Text(
+                                                'Delete'
+                                            ),
+                                            onPressed: () {
+                                              deleteData(snapshot, index);
+                                            },
+                                          ),
+                                        ),
 
 
-                                  ],
-                                )),
+                                      ],
+                                    )),
 
 
-                          ],
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
 
-                      SizedBox(
-                        height: 20,
-                      )
-                    ],
-                  );
-                });
-          }
-        },
+                        SizedBox(
+                          height: 20,
+                        )
+                      ],
+                    );
+                  });
+            }
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: null,
         onPressed: (){
           toAddItem();
         },
-        child: Icon(Icons.add,color: Colors.white),
-        backgroundColor: Colors.blue[600],
+        child: Icon(Icons.add,color: Colors.white ),
+        backgroundColor: Colors.green,
       ),
 
       bottomNavigationBar: AdminBottomNavigation(input: 0),
