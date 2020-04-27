@@ -87,120 +87,128 @@ class _NewTaskState extends State<Item> {
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _myAppBar(),
-            Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height - 10,
-              child: ListView(
-                children: <Widget>[
 
-                  isImageLoaded ?
-                  Container(
-                      child: isImageLoaded ? Image.asset(image) : null
-                  )
-                      :
-                  Container(
-
+          child: DecoratedBox(
+            position: DecorationPosition.background,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              image: DecorationImage(
+                  image: AssetImage('assets/images/orderback.jpg'),
+                  fit: BoxFit.cover),
+            ),
+            child: Column(
+              children: <Widget>[
+                _myAppBar(),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    color: Colors.amber.withOpacity(0.7),
                   ),
-
-                  Container(
-                    // padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: FlatButton.icon(
-                      color: Colors.white,
-                      icon: Icon(Icons.add_photo_alternate), //`Icon` to display
-                      label: Text(
-                          'Upload image'
-                      ),
-                      onPressed: () {
-                        chooseImage();
-                      },
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String title) {
-                        setTitle(title);
-                      },
-                      decoration: InputDecoration(labelText: "Title"),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String subtitle) {
-                        setSubtitle(subtitle);
-                      },
-                      decoration: InputDecoration(labelText: "Subtitle"),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String description) {
-                        setDescription(description);
-                      },
-                      decoration: InputDecoration(labelText: "Description"),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: TextField(
-                      onChanged: (String price) {
-                        setPrice(price);
-                      },
-                      decoration: InputDecoration(labelText: "Price"),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: MediaQuery
-                        .of(context)
-                        .viewInsets
-                        .bottom,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Column(
                     children: <Widget>[
-                      RaisedButton(
-                        color: Colors.blue,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(color: Colors.white),
+
+                      isImageLoaded ?
+                      Container(
+                          child: isImageLoaded ? Image.asset(image) : null
+                      )
+                          :
+                      Container(
+
+                      ),
+
+                      Container(
+                        // padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: FlatButton.icon(
+                          color: Colors.white,
+                          icon: Icon(Icons.add_photo_alternate),
+                          //`Icon` to display
+                          label: Text(
+                              'Upload image'
+                          ),
+                          onPressed: () {
+                            chooseImage();
+                          },
                         ),
                       ),
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          createData();
-                        },
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(color: Colors.white),
+
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: TextField(
+                          onChanged: (String title) {
+                            setTitle(title);
+                          },
+                          decoration: InputDecoration(labelText: "Title"),
                         ),
-                      )
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: TextField(
+                          onChanged: (String subtitle) {
+                            setSubtitle(subtitle);
+                          },
+                          decoration: InputDecoration(labelText: "Subtitle"),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: TextField(
+                          onChanged: (String description) {
+                            setDescription(description);
+                          },
+                          decoration: InputDecoration(labelText: "Description"),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: TextField(
+                          onChanged: (String price) {
+                            setPrice(price);
+                          },
+                          decoration: InputDecoration(labelText: "Price"),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: MediaQuery
+                            .of(context)
+                            .viewInsets
+                            .bottom,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: Colors.blue,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          RaisedButton(
+                            color: Colors.redAccent,
+                            onPressed: () {
+                              createData();
+                            },
+                            child: const Text(
+                              "Submit",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
+                ),
 
-          ],
-        ),
+              ],
+            ),
+          )
       ),
     );
   }
@@ -210,9 +218,6 @@ class _NewTaskState extends State<Item> {
     return AppBar(
       leading: IconButton(
         icon: Icon(FontAwesomeIcons.bars),
-        onPressed: () {
-          Navigator.pop(context);
-        },
       ),
       title: Container(
         alignment: Alignment.center,
