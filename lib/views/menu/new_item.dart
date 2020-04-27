@@ -88,6 +88,7 @@ class _NewTaskState extends State<Item> {
       resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
 
+
         child:DecoratedBox(
 
         decoration: BoxDecoration(
@@ -111,6 +112,7 @@ class _NewTaskState extends State<Item> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListView(
+
                     children: <Widget>[
 
                       isImageLoaded ?
@@ -123,6 +125,7 @@ class _NewTaskState extends State<Item> {
                       ),
 
                       Container(
+
                         margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                         padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
 
@@ -284,6 +287,7 @@ class _NewTaskState extends State<Item> {
                             )
                           ],
                         ),
+
                       ),
                     ],
                   ),
@@ -293,6 +297,7 @@ class _NewTaskState extends State<Item> {
             ],
           ),
         ),
+
       ),
     );
   }
@@ -302,9 +307,6 @@ class _NewTaskState extends State<Item> {
     return AppBar(
       leading: IconButton(
         icon: Icon(FontAwesomeIcons.bars),
-        onPressed: () {
-          Navigator.pop(context);
-        },
       ),
       title: Container(
         alignment: Alignment.center,

@@ -31,11 +31,15 @@ class _OrderListState extends State<OrderList> {
     });
   }
 
-  deleteOrder(snapshot, index) async {
+  deleteOrder(snapshot, index, BuildContext context ) async {
     await Firestore.instance.runTransaction((Transaction myTransaction) async {
       await myTransaction.delete(snapshot.data.documents[index].reference);
+
+      showToast(context, "Order deleted successfully !");
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +143,7 @@ class _OrderListState extends State<OrderList> {
                                     child: Icon(Icons.delete_forever),
                                     textColor: Colors.redAccent,// `Icon` to display
                                     onPressed: () {
-                                      deleteOrder(snapshot, index);
+                                      deleteOrder(snapshot, index, context );
                                     },
                                   ),
                                 ),
@@ -160,6 +164,17 @@ class _OrderListState extends State<OrderList> {
 
       ),
 
+    );
+  }
+
+  void showToast(BuildContext context, String message ) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content:  Text(message),
+        action: SnackBarAction(
+            label: 'Ok', onPressed: scaffold.hideCurrentSnackBar),
+      ),
     );
   }
 }

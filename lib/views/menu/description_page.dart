@@ -69,6 +69,7 @@ class _DescriptionState extends State<DescriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+
       body: DecoratedBox(
         position: DecorationPosition.background,
         decoration: BoxDecoration(
@@ -145,6 +146,7 @@ class _DescriptionState extends State<DescriptionPage> {
           ],
         ),
       )
+
     );
   }
 
@@ -152,13 +154,12 @@ class _DescriptionState extends State<DescriptionPage> {
     return AppBar(
       leading: IconButton(
         icon: Icon(FontAwesomeIcons.bars),
-        onPressed: () {
-          Navigator.pop(context);
-        },
       ),
       title: Container(
         alignment: Alignment.center,
+
         child: Text("Menu Item", style: TextStyle()),
+
       ),
       actions: <Widget>[
         IconButton(
