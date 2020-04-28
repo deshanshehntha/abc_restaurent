@@ -187,7 +187,7 @@ class _NewTaskState extends State<Item> {
                         padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
                         child: TextFormField(
                           onChanged: (String subtitle) {
-                            setTitle(subtitle);
+                            setSubtitle(subtitle);
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -211,7 +211,7 @@ class _NewTaskState extends State<Item> {
                         padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
                         child: TextFormField(
                           onChanged: (String description) {
-                            setTitle(description);
+                            setDescription(description);
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -235,7 +235,7 @@ class _NewTaskState extends State<Item> {
                         padding: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
                         child: TextFormField(
                           onChanged: (String price) {
-                            setTitle(price);
+                            setPrice(price);
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
