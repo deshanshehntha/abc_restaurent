@@ -1,5 +1,6 @@
 import 'package:awesome_project/views/menu/description_page.dart';
 import 'package:awesome_project/views/menu/update_menu_item.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -63,6 +64,14 @@ class _MenuListState extends State<MenuList> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(FontAwesomeIcons.bars),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => Item(),
+                    fullscreenDialog: true
+                )
+            );
+          },
         ),
         title: Container(
           alignment: Alignment.center,
@@ -83,16 +92,13 @@ class _MenuListState extends State<MenuList> {
           image: DecorationImage(
               image: AssetImage('assets/images/dark_back.jpg'),
               fit: BoxFit.fill),
-
         ),
         child: StreamBuilder(
           stream: Firestore.instance.collection('post').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Scaffold(
-
                 body: Text( "Loading ... "),
-
               );
             } else {
               return ListView.builder(
@@ -103,6 +109,7 @@ class _MenuListState extends State<MenuList> {
                     title = mypost['title'];
                     return Stack(
                       children: [
+
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
@@ -229,65 +236,16 @@ class _MenuListState extends State<MenuList> {
                                           ),
                                         ),
 
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 55.0, top: 10.00),
-                                              child: FlatButton.icon(
-                                                color: Colors.white,
-                                                icon: Icon(
-                                                    Icons.edit
-                                                ),
-                                                //
-                                                textColor: Colors.blueAccent,
-                                                // `Icon` to display
-                                                label: Text(
-                                                    'Edit'
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              UpdateItem(
-                                                                  id: title),
-                                                          fullscreenDialog: true
-                                                      )
-                                                  );
-                                                },
-                                              ),
-                                            ),
-
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 55.0, top: 10.00),
-                                              child: FlatButton.icon(
-                                                color: Colors.white,
-                                                icon: Icon(
-                                                    Icons.delete_forever
-                                                ),
-                                                //
-                                                textColor: Colors.redAccent,
-                                                // `Icon` to display
-                                                label: Text(
-                                                    'Delete'
-                                                ),
-                                                onPressed: () {
-                                                  deleteData(snapshot, index);
-                                                },
-                                              ),
-                                            ),
-
 
                                       ],
                                     )),
-
-                                          ],
-                                        )),
 
 
                               ],
                             ),
                           ),
                         ),
+
                         SizedBox(
                           height: 20,
                         )
@@ -298,11 +256,6 @@ class _MenuListState extends State<MenuList> {
           },
         ),
       ),
-
-
-
-
-
       floatingActionButton: FloatingActionButton(
         heroTag: null,
         onPressed: (){
@@ -317,3 +270,46 @@ class _MenuListState extends State<MenuList> {
   }
 
 }
+
+/*
+  children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 350.0,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                          child: Material(
+                            color: Colors.white,
+                            elevation: 14.0,
+                            shadowColor: Color(0x802196F3),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 200.0,
+                                      child: Image.network('${mypost['image']}',
+                                          fit: BoxFit.fill),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    Text('${mypost['title']}',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10.0),
+                                    Text('${mypost['subtitle']}',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+ */

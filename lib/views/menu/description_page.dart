@@ -68,85 +68,83 @@ class _DescriptionState extends State<DescriptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-
-      body: DecoratedBox(
-        position: DecorationPosition.background,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          image: DecorationImage(
-              image: AssetImage('assets/images/dark_back.jpg'),
-              fit: BoxFit.cover),
-        ),
-        child:Column(
-          children: <Widget>[
-            _myAppBar(),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 200,
-              child: ListView(
-                children: <Widget>[
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Text(
-                      title != null ?  title : "",
-
-                      style: TextStyle(
-                          fontSize: 30,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.amber),
+        resizeToAvoidBottomInset: false,
+        body: DecoratedBox(
+          position: DecorationPosition.background,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage('assets/images/dark_back.jpg'),
+                fit: BoxFit.cover),
+          ),
+          child:Column(
+            children: <Widget>[
+              _myAppBar(),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height - 200,
+                child: ListView(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
+                    Padding(
                       padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: image != null ?  Image.network(image) : Text("No image to display")
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Text(
-                      subtitle != null ? subtitle : "",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          foreground: Paint()
-                            ..style = PaintingStyle.fill
-                            ..strokeWidth = 1
-                            ..color = Colors.orange),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Text(
-                      description != null ? description : "",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 26,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white
+                      child: Text(
+                        title != null ?  title : "",
+
+                        style: TextStyle(
+                            fontSize: 30,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.amber),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: image != null ?  Image.network(image) : Text("No image to display")
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: Text(
+                        subtitle != null ? subtitle : "",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            foreground: Paint()
+                              ..style = PaintingStyle.fill
+                              ..strokeWidth = 1
+                              ..color = Colors.orange),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: Text(
+                        description != null ? description : "",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      )
-
+            ],
+          ),
+        )
     );
   }
 
@@ -154,12 +152,13 @@ class _DescriptionState extends State<DescriptionPage> {
     return AppBar(
       leading: IconButton(
         icon: Icon(FontAwesomeIcons.bars),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
       title: Container(
         alignment: Alignment.center,
-
         child: Text("Menu Item", style: TextStyle()),
-
       ),
       actions: <Widget>[
         IconButton(
