@@ -6,7 +6,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'admin_menu_list.dart';
 import 'package:image_picker/image_picker.dart';
 
+
+/// This is  the update menu item class
+/// created by IT17104654
 class UpdateItem extends StatefulWidget {
+
+  /// This class has parameter id
+  ///  This id is document titile
   final String id;
 
   UpdateItem({this.id});
@@ -15,31 +21,41 @@ class UpdateItem extends StatefulWidget {
   _UpdateTaskState createState() => _UpdateTaskState();
 }
 
+
 class _UpdateTaskState extends State<UpdateItem> {
+
+  ///  variables for the update post
   String title, subtitle, image, description, price;
   bool isImageLoaded = false;
   File imageFile;
 
+  ///  setter for title
   setTitle(title) {
     this.title = title;
   }
 
+  ///  setter for subtitle
   setSubtitle(subtitle) {
     this.subtitle = subtitle;
   }
 
+  ///  setter for image
   setImage(image) {
     this.image = image;
   }
 
+  ///  setter for description
   setDescription(description) {
     this.description = description;
   }
 
+  ///  setter for price
   setPrice(price) {
     this.price = price;
   }
 
+
+  ///  image picker
   Future chooseImage() async {
     await ImagePicker.pickImage(source: ImageSource.gallery).then((img) {
       setState(() {
@@ -56,6 +72,7 @@ class _UpdateTaskState extends State<UpdateItem> {
     loadItemData();
   }
 
+  ///  Load the data according to the id paased from the list
   loadItemData() async {
     print("id");
 
@@ -76,6 +93,7 @@ class _UpdateTaskState extends State<UpdateItem> {
     });
   }
 
+  ///  Update the data based on title
   createData() async {
     DocumentReference ds =
     Firestore.instance.collection("post").document(title);
@@ -218,6 +236,7 @@ class _UpdateTaskState extends State<UpdateItem> {
     );
   }
 
+  /// app bar fot the top of the screen
   Widget _myAppBar() {
     return AppBar(
       leading: IconButton(

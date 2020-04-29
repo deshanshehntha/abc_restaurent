@@ -15,7 +15,8 @@ import 'views/order/order_list.dart';
 
 /// This is  the main class of the appication
 /// This class contains the routers and
-/// splash screens
+/// splash screen by IT17104654
+/// Load firebase Users by IT17103732
 
 /// Main routes of the application
 void main() => runApp(MaterialApp(
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> {
     loadUser();
   }
 
+  /// Load firebase users from firestore
   loadUser() async{
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
@@ -66,6 +68,7 @@ class _MyAppState extends State<MyApp> {
 
   }
 
+  /// Build the splash screen
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(

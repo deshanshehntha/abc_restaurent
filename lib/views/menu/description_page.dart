@@ -7,7 +7,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'admin_menu_list.dart';
 import 'package:image_picker/image_picker.dart';
 
+
+/// This is  the Description page
+/// created by IT17104654
 class DescriptionPage extends StatefulWidget {
+
+  /// This class has parameter id
+  ///  This id is document titile
   final String id;
 
   DescriptionPage({this.id});
@@ -17,33 +23,41 @@ class DescriptionPage extends StatefulWidget {
 }
 
 class _DescriptionState extends State<DescriptionPage> {
+
+  ///  variables for bind the data
   String title, subtitle, image, description;
 
   bool isImageLoaded = false;
   File imageFile;
 
+  ///  setter for title
   getTitle(title) {
     this.title = title;
   }
 
+  ///  setter for subtitle
   getSubtitle(subtitle) {
     this.subtitle = subtitle;
   }
 
+  ///  setter for image
   getImage(image) {
     this.image = image;
   }
 
+  ///  setter for description
   getDescription(description) {
     this.description = description;
   }
 
+  ///  load the data in the start
   @override
   void initState() {
     super.initState();
     loadItemData();
   }
 
+  ///  load the data from firestore
   loadItemData() async {
     print("id");
     print("The id : " + widget.id);
@@ -65,6 +79,8 @@ class _DescriptionState extends State<DescriptionPage> {
     });
   }
 
+
+  ///  Build the widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +164,7 @@ class _DescriptionState extends State<DescriptionPage> {
     );
   }
 
+  /// app bar to show in the top
   Widget _myAppBar() {
     return AppBar(
       leading: IconButton(
@@ -158,7 +175,7 @@ class _DescriptionState extends State<DescriptionPage> {
       ),
       title: Container(
         alignment: Alignment.center,
-        child: Text("Menu Item", style: TextStyle()),
+        child: Text("Description", style: TextStyle()),
       ),
       actions: <Widget>[
         IconButton(

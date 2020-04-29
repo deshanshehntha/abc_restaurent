@@ -7,6 +7,9 @@ import 'admin_menu_list.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+
+/// This is  the add new menu item class
+/// created by IT17104654
 class Item extends StatefulWidget {
   Item();
 
@@ -15,30 +18,39 @@ class Item extends StatefulWidget {
 }
 
 class _NewTaskState extends State<Item> {
+
+  ///  variables for the post
   String title, subtitle, image, description, price;
   bool isImageLoaded = false;
   File imageFile;
 
+  ///  setter for title
   setTitle(title) {
     this.title = title;
   }
 
+  ///  setter for subtitle
   setSubtitle(subtitle) {
     this.subtitle = subtitle;
   }
 
+  ///  setter for image
   setImage(image) {
     this.image = image;
   }
 
+  ///  setter for description
   setDescription(description) {
     this.description = description;
   }
 
+  ///  setter for price
   setPrice(price) {
     this.price = price;
   }
 
+  ///  This will pick the image from the gallery
+  ///  image picker by IT17103732
   Future chooseImage() async{
     await ImagePicker.pickImage(source: ImageSource.gallery).then((img){
       setState(() {
@@ -49,9 +61,8 @@ class _NewTaskState extends State<Item> {
     });
   }
 
-
+  ///  Create and upload a new item for the databsase
   createData() async{
-
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
         .child('chats/${image.split('/').last}');
@@ -302,7 +313,7 @@ class _NewTaskState extends State<Item> {
     );
   }
 
-
+  ///  widget for appbar on the top
   Widget _myAppBar() {
     return AppBar(
       leading: IconButton(
