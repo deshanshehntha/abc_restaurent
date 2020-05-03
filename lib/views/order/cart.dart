@@ -1,3 +1,7 @@
+///Student ID : IT17103732
+///Name : Silva N.P.S
+///POJO class for the Cart
+
 class Cart{
 
   String title;

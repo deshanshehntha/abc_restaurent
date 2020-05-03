@@ -1,3 +1,7 @@
+///Student ID : IT17103732
+///Name : Silva N.P.S
+///Login class that performs all the login of users
+
 import 'package:awesome_project/views/auth/register.dart';
 import 'package:awesome_project/views/menu/admin_menu_list.dart';
 import 'package:awesome_project/views/menu/customer_menu_list.dart';
@@ -20,6 +24,7 @@ class _LoginState extends State<Login> {
   String type;
   bool isError = false;
 
+  ///function to redirect the user based on the role
   redirectUser() async{
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
@@ -58,6 +63,8 @@ class _LoginState extends State<Login> {
 
   }
 
+  ///function to validate the form
+  ///returns false if the validation conditions are not met
   bool validateAndSave(){
     final form = formKey.currentState;
 
@@ -72,7 +79,7 @@ class _LoginState extends State<Login> {
   }
 
 
-
+  ///initialize the state
   @override
   void initState() {
 
@@ -84,6 +91,7 @@ class _LoginState extends State<Login> {
 
   }
 
+  ///function to redirect to Register Page
   void toRegister(){
     Navigator.of(context).pop();
     Navigator.push(context,
@@ -94,16 +102,17 @@ class _LoginState extends State<Login> {
 
   }
 
+  ///function to login the user with the use of email and password
   void validateAndSubmit() async {
     if(validateAndSave()){
 
       try{
         AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-        FirebaseUser user = result.user; // get the firebase user from the AuthResult
+        FirebaseUser user = result.user; /// get the firebase user from the AuthResult
 
         print('Signed in ${user.uid} ');
 
-        redirectUser();
+        redirectUser(); ///call the redirectUser function
       }catch(e){
         print('Exception : $e' );
         print(e.toString());
@@ -115,6 +124,7 @@ class _LoginState extends State<Login> {
     }
   }
 
+  ///Flutter build method
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -283,14 +293,5 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void showToast(BuildContext context, String message ) {
-    final scaffold = Scaffold.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content:  Text(message),
-        action: SnackBarAction(
-            label: 'Ok', onPressed: scaffold.hideCurrentSnackBar),
-      ),
-    );
-  }
+
 }
