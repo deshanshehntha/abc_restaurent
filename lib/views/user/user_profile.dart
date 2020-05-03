@@ -1,3 +1,7 @@
+///Student ID : IT17103732
+///Name : Silva N.P.S
+///User profile class to manage the user account
+
 import 'dart:io';
 import 'package:awesome_project/views/navbar/admin_bottom_navigation.dart';
 import 'package:awesome_project/views/navbar/customer_bottom_navigation.dart';
@@ -6,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -23,22 +26,21 @@ class _UserProfileState extends State<UserProfile> {
   String type;
 
 
-  //edit section
+  ///edit variables
   String editFirstName;
   String editLastName;
   String editTelephone;
-  /*
-  Choose the image
-   */
+
+  ///function to choose the image
+  ///with the image picker
   Future chooseImage() async{
     await ImagePicker.pickImage(source: ImageSource.gallery).then((image){
       uploadImage(image);
     });
   }
 
-  /*
-  Upload the image to the firebase storage
-   */
+
+  ///function Upload the image to the firebase storage
   Future uploadImage(File img ) async{
     StorageReference storageRef = FirebaseStorage.instance
         .ref()
@@ -58,9 +60,9 @@ class _UserProfileState extends State<UserProfile> {
     });
   }
 
-  /*
-  Update the firebase records
-   */
+
+   ///function to update the firebase records
+  ///after uploading the profile pic to firebase storage
   Future updateProfilePic( String imgUrl ) async{
 
     DocumentReference docRef =  await Firestore.instance.collection("user").document(uid);
@@ -75,9 +77,8 @@ class _UserProfileState extends State<UserProfile> {
     });
   }
 
-  /*
-  Update firstname and lastname of user
-   */
+
+  ///function to update firstname and lastname of user
   Future updateUserName() async{
 
     DocumentReference docRef = await Firestore.instance.collection("user").document(uid);
@@ -102,9 +103,8 @@ class _UserProfileState extends State<UserProfile> {
 
   }
 
-  /*
-  Update the telephone number of user
-   */
+
+  ///function to update the telephone number of user
   Future updateTelephone() async{
 
     DocumentReference docRef = await Firestore.instance.collection("user").document(uid);
@@ -120,6 +120,7 @@ class _UserProfileState extends State<UserProfile> {
 
   }
 
+  ///initialize the state
   @override
   void initState() {
     super.initState();
@@ -127,6 +128,7 @@ class _UserProfileState extends State<UserProfile> {
     loadUserData();
   }
 
+  ///load user data from the firebase firestore
   void loadUserData() async{
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
@@ -145,6 +147,7 @@ class _UserProfileState extends State<UserProfile> {
     });
   }
 
+  ///Flutter build method
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -187,18 +190,6 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ),
 
-                  /*
-                Text(
-                  'Welcome',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'SourceSansPro',
-                    color: Colors.red[400],
-                    letterSpacing: 2.5,
-                  ),
-                ),
-
-                 */
                   SizedBox(
                     height: 20.0,
                     width: 200,
@@ -257,10 +248,7 @@ class _UserProfileState extends State<UserProfile> {
 
   }
 
-  onTap(){
-    print('Tapped');
-  }
-
+  ///function to display the dialog of the telephone number edit
   displayTelephoneEditDialog( BuildContext context ) async{
     return showDialog(
         context: context,
@@ -311,6 +299,7 @@ class _UserProfileState extends State<UserProfile> {
         });
   }
 
+  ///function to display the dialog of the firstname and lastname edit
   displayNameEditDialog(BuildContext context) async {
     return showDialog(
         context: context,

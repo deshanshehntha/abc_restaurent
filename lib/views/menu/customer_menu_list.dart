@@ -1,4 +1,7 @@
-import 'dart:collection';
+///Student ID : IT17103732
+///Name : Silva N.P.S
+///Customer menu list to show all the available menu items
+///To manage the order cart and place orders
 
 import 'package:awesome_project/views/navbar/customer_bottom_navigation.dart';
 import 'package:awesome_project/views/order/order_list.dart';
@@ -27,9 +30,9 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
   int cartQuantity;
   double netTotal;
 
-  Cart cartObj = new Cart();
+  Cart cartObj = new Cart(); ///initialize a Cart object
 
-  Map<String, Cart> cart = new Map<String, Cart>();
+  Map<String, Cart> cart = new Map<String, Cart>(); ///Map to store the temporary cart
 
   List<Cart> cartList = new List<Cart>();
 
@@ -42,16 +45,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
     netTotal = 0;
   }
 
-  void toAddItem(){
-
-    Navigator.push(context,
-        MaterialPageRoute(
-            builder: (context) => Item(),
-            fullscreenDialog: true
-        )
-    );
-  }
-
+  ///function to save order details in the firestore database
   addOrder() async{
     ///fetch the user
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
@@ -74,6 +68,8 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
     });
   }
 
+  ///function to store the Map data in a List
+  ///Done to show the list view
   loadMapToList(){
 
     cartList.clear();
@@ -83,7 +79,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
       cartList.add(value)
     ));
 
-    ///get the total of the cart
+    ///function to get the total of the cart
     cart.forEach((key,value)=>(
       netTotal += value.getTotal()
 
@@ -95,6 +91,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
   }
 
 
+  ///function to update the cart by user selections in the menu
   updateCart( String itemTitle, Cart newCart ){
 
     setState(() {
@@ -103,15 +100,18 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
       quantity = 0;
     });
 
-
   }
 
+  ///function to delete the selected items from the cart
   deleteItemFromCart( String key ){
     setState(() {
+      cartQuantity -= cart[key].getQuantity();
+      netTotal -= cart[key].getTotal();
       cart.remove(key);
     });
   }
 
+  ///Flutter build method
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -283,7 +283,8 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
   }
 
 
-
+    ///function to show the current content in the cart as an order
+    ///this is done as a popup
     showSingleOrder(BuildContext context) {
       Size size = MediaQuery.of(context).size;
       return showDialog(
@@ -391,7 +392,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
           });
     }
 
-
+  ///function to display the pop up to enter the item quantity
   displayItemAdd( BuildContext context, double amount ) async{
     return showDialog(
         context: context,
@@ -438,6 +439,7 @@ class _CustomerMenuListState extends State<CustomerMenuList> {
 
                         Cart newCart = new Cart();
 
+                        ///set the cart object with the respective details
                         newCart.setTitle(title);
                         newCart.setQuantity(quantity);
                         newCart.setAmount(amount);
