@@ -7,6 +7,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../navbar/admin_bottom_navigation.dart';
 import 'new_item.dart';
 
+
+/// This is  the main menu list  class
+/// This Class will act as the main dashboard for admin.
+/// admin menu list by IT17104654
 class MenuList extends StatefulWidget {
 
   final String title;
@@ -19,6 +23,9 @@ class MenuList extends StatefulWidget {
 
 class _MenuListState extends State<MenuList> {
 
+
+  /// After clicking the add item floating button
+  /// This method will navigate user to add item page
   void toAddItem(){
     Navigator.push(context,
         MaterialPageRoute(
@@ -28,6 +35,7 @@ class _MenuListState extends State<MenuList> {
     );
   }
 
+  /// Method for delele data in a single touch
   deleteData(snapshot, index) async {
     await Firestore.instance.runTransaction((Transaction myTransaction) async {
       await myTransaction.delete(snapshot.data.documents[index].reference);
@@ -35,6 +43,9 @@ class _MenuListState extends State<MenuList> {
     _showDialog();
   }
 
+  /// Method show the dialog after deleting an item
+  /// Delete confirmation
+  /// This is a flutter defined functon
   void _showDialog() {
     // flutter defined function
     showDialog(
@@ -58,7 +69,7 @@ class _MenuListState extends State<MenuList> {
     );
   }
 
-
+  /// Inbuilt build method
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -272,45 +283,3 @@ class _MenuListState extends State<MenuList> {
 
 }
 
-/*
-  children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 350.0,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                          child: Material(
-                            color: Colors.white,
-                            elevation: 14.0,
-                            shadowColor: Color(0x802196F3),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 200.0,
-                                      child: Image.network('${mypost['image']}',
-                                          fit: BoxFit.fill),
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    Text('${mypost['title']}',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(height: 10.0),
-                                    Text('${mypost['subtitle']}',
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
- */
