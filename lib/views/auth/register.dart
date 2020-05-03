@@ -1,3 +1,7 @@
+///Student ID : IT17103732
+///Name : Silva N.P.S
+///Register class that performs all the registration of user activities
+
 import 'package:awesome_project/views/auth/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +23,8 @@ class _RegisterState extends State<Register> {
   String password;
   String telephone;
 
+  ///function to validate the form
+  ///returns false if the validation conditions are not met
   bool validateAndSave(){
     final form = formKey.currentState;
 
@@ -32,6 +38,7 @@ class _RegisterState extends State<Register> {
     }
   }
 
+  ///function to redirect to Login Page
   void toLogin(){
     Navigator.push(context,
         MaterialPageRoute(
@@ -40,23 +47,24 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  ///function to create the user account with email and password
   void validateAndSubmit() async {
     if(validateAndSave()){
 
       try{
         AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-        FirebaseUser user = result.user; // get the firebase user from the AuthResult
+        FirebaseUser user = result.user; /// get the firebase user from the AuthResult
 
         print('Signed in ${user.uid} ');
 
-        saveUserDetails(user.uid);
+        saveUserDetails(user.uid); ///store the respective data after registering
 
+        Navigator.of(context).pop();
         Navigator.push(context,
             MaterialPageRoute(
-              builder: (context) => CustomerMenuList()
+                builder: (context) => CustomerMenuList()
             )
         );
-        Navigator.of(context).pop();
 
       }catch(e){
         print('Exception : $e' );
@@ -65,7 +73,7 @@ class _RegisterState extends State<Register> {
     }
   }
 
-
+  ///function to save the user data into the Firebase Firestore
   void saveUserDetails(String uid ) async{
     DocumentReference docRef =  await Firestore.instance.collection("user").document(uid);
 
@@ -82,6 +90,7 @@ class _RegisterState extends State<Register> {
     });
   }
 
+  ///Flutter build method
   @override
   Widget build(BuildContext context) {
     return Scaffold(

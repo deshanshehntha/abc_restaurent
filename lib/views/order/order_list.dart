@@ -1,5 +1,7 @@
-import 'package:awesome_project/views/navbar/admin_bottom_navigation.dart';
-import 'package:awesome_project/views/navbar/customer_bottom_navigation.dart';
+///Student ID : IT17103732
+///Name : Silva N.P.S
+///Order list class to show all the placed orders
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +17,7 @@ class _OrderListState extends State<OrderList> {
 
   String uid;
 
+  ///init the status
   @override
   void initState() {
 
@@ -22,6 +25,8 @@ class _OrderListState extends State<OrderList> {
     loadUser();
   }
 
+  ///load the logged user details from the database
+  ///The id/key is needed to fetch the customer orders
   loadUser() async{
     ///fetch the user
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
@@ -31,6 +36,7 @@ class _OrderListState extends State<OrderList> {
     });
   }
 
+  ///function to delete an selected order
   deleteOrder(snapshot, index, BuildContext context ) async {
     await Firestore.instance.runTransaction((Transaction myTransaction) async {
       await myTransaction.delete(snapshot.data.documents[index].reference);
@@ -40,7 +46,7 @@ class _OrderListState extends State<OrderList> {
   }
 
 
-
+  ///Flutter build method
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -167,6 +173,7 @@ class _OrderListState extends State<OrderList> {
     );
   }
 
+  ///function to display the snackbar with the message
   void showToast(BuildContext context, String message ) {
     final scaffold = Scaffold.of(context);
     scaffold.showSnackBar(

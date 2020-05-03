@@ -1,5 +1,6 @@
 import 'package:awesome_project/views/menu/description_page.dart';
 import 'package:awesome_project/views/menu/update_menu_item.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -231,7 +232,7 @@ class _MenuListState extends State<MenuList> {
                                         ),
 
                                         Padding(
-                                          padding: EdgeInsets.all(1.0),
+                                          padding:  EdgeInsets.all(7.0),
                                           child:FlatButton.icon(
                                             color: Colors.white,
                                             icon: Icon(
